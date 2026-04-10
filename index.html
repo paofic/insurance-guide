@@ -3,1003 +3,1380 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🛡️ Страхование — просто и понятно</title>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;900&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>СтраховаВАНЯ — страхование просто и понятно</title>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700;900&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --blue: #0077FF;
-    --blue-dark: #0055CC;
-    --blue-light: #E8F2FF;
-    --green: #00C897;
-    --orange: #FF7A1A;
-    --red: #FF4D6A;
-    --yellow: #FFD93D;
-    --bg: #F0F5FF;
-    --surface: #FFFFFF;
-    --text: #0D1B3E;
-    --text-muted: #6B7A99;
-    --border: #D6E4FF;
-    --radius: 20px;
-    --shadow: 0 8px 32px rgba(0,119,255,0.12);
-  }
+:root {
+  --blue: #1A6BFF;
+  --blue-dark: #0F4FCC;
+  --blue-light: #EBF2FF;
+  --green: #12B886;
+  --green-light: #E6FAF4;
+  --orange: #F76707;
+  --orange-light: #FFF3E6;
+  --red: #E03131;
+  --purple: #845EF7;
+  --purple-light: #F0EBFF;
+  --bg: #E8EEF8;
+  --bg-2: #DDE5F5;
+  --white: #FFFFFF;
+  --card: #FFFFFF;
+  --text: #1A1A2E;
+  --text-2: #444466;
+  --text-muted: #8888AA;
+  --border: #C8D5EE;
+  --radius: 18px;
+  --shadow: 0 4px 24px rgba(26,107,255,0.10);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Golos Text', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+}
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+.header {
+  background: var(--blue); height: 60px; padding: 0 20px;
+  display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0; z-index: 200;
+  box-shadow: 0 2px 16px rgba(26,107,255,0.25);
+}
+.logo { font-size: 20px; font-weight: 900; color: #fff; letter-spacing: -0.5px; }
+.logo em { font-style: normal; text-transform: uppercase; }
+.nav { display: flex; gap: 6px; }
+.nav-btn {
+  background: rgba(255,255,255,0.13); border: 1px solid rgba(255,255,255,0.22);
+  color: #fff; padding: 7px 16px; border-radius: 8px;
+  font-family: 'Golos Text', sans-serif; font-size: 13px; font-weight: 600;
+  cursor: pointer; transition: all 0.18s;
+}
+.nav-btn:hover { background: rgba(255,255,255,0.22); border-color: rgba(255,255,255,0.4); }
+.nav-btn.active { background: rgba(255,255,255,0.95); color: var(--blue); font-weight: 800; border-color: #fff; }
 
-  body {
-    font-family: 'Manrope', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
+.page { display: none; }
+.page.active { display: block; }
 
-  /* ─── HEADER ─── */
-  .header {
-    background: var(--blue);
-    color: #fff;
-    padding: 0 24px;
-    height: 64px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 4px 20px rgba(0,119,255,0.3);
-  }
-  .header-logo {
-    font-family: 'Unbounded', sans-serif;
-    font-weight: 700;
-    font-size: 18px;
-    letter-spacing: -0.5px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .header-logo span { font-size: 22px; }
-  .header-nav {
-    display: flex;
-    gap: 6px;
-  }
-  .nav-btn {
-    background: rgba(255,255,255,0.15);
-    border: 1px solid rgba(255,255,255,0.25);
-    color: #fff;
-    padding: 8px 16px;
-    border-radius: 50px;
-    font-family: 'Manrope', sans-serif;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .nav-btn:hover, .nav-btn.active {
-    background: rgba(255,255,255,0.3);
-    border-color: rgba(255,255,255,0.5);
-  }
+.hero {
+  background: linear-gradient(150deg, #0A3FA0 0%, #1A6BFF 60%, #38A8FF 100%);
+  color: #fff; padding: 48px 20px 56px; text-align: center; position: relative; overflow: hidden;
+}
+.hero::after {
+  content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 32px;
+  background: var(--white); clip-path: ellipse(55% 100% at 50% 100%);
+}
+.hero-eyebrow {
+  display: inline-block; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 6px; padding: 4px 14px; font-size: 11px; font-weight: 700;
+  letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 20px;
+}
+.hero h1 {
+  font-size: clamp(26px, 6vw, 46px); font-weight: 900; line-height: 1.13;
+  margin-bottom: 14px; max-width: 560px; margin-left: auto; margin-right: auto;
+}
+.hero p { font-size: 15px; opacity: 0.82; max-width: 420px; margin: 0 auto 32px; line-height: 1.65; font-weight: 500; }
+.hero-btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+.btn-white {
+  background: #fff; color: var(--blue); border: none; padding: 13px 26px;
+  border-radius: 10px; font-family: 'Golos Text', sans-serif; font-size: 14px; font-weight: 700;
+  cursor: pointer; transition: all 0.18s; box-shadow: 0 4px 16px rgba(0,0,0,0.14);
+}
+.btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.18); }
+.btn-ghost {
+  background: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.45);
+  padding: 11px 22px; border-radius: 10px; font-family: 'Golos Text', sans-serif;
+  font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.18s;
+}
+.btn-ghost:hover { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.75); }
 
-  /* ─── PAGES ─── */
-  .page { display: none; }
-  .page.active { display: block; }
+/* ── VANYA + CHARACTERS ── */
+.vanya-section {
+  background: #EBF2FF;
+  border-bottom: 2px solid var(--border); padding: 32px 20px 28px;
+}
+.vanya-inner { max-width: 1100px; margin: 0 auto; }
+.vanya-row { display: flex; align-items: flex-start; gap: 20px; margin-bottom: 32px; }
+.vanya-ava-big {
+  width: 88px; height: 88px; border-radius: 50%; flex-shrink: 0;
+  background: var(--blue); display: flex; align-items: center; justify-content: center;
+  font-size: 36px; font-weight: 900; color: #fff; overflow: hidden;
+}
+.vanya-text h2 { font-size: 20px; font-weight: 900; margin-bottom: 7px; }
+.vanya-text p { font-size: 14px; line-height: 1.7; color: var(--text-2); }
+.chars-label { font-size: 11px; font-weight: 800; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 14px; }
+.chars-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.char-card {
+  background: var(--white); border: 1.5px solid var(--border); border-radius: 18px;
+  padding: 20px 12px 18px; text-align: center; cursor: pointer; transition: all 0.2s;
+  box-shadow: 0 4px 18px rgba(26,107,255,0.13);
+}
+.char-card:hover { border-color: var(--blue); box-shadow: var(--shadow); transform: translateY(-3px); }
+.char-ava-wrap {
+  width: 200px; height: 200px; border-radius: 50%; overflow: hidden;
+  margin: 0 auto 14px; border: 3px solid var(--border); background: var(--blue-light);
+  transition: border-color 0.2s;
+}
+.char-card:hover .char-ava-wrap { border-color: var(--blue); }
+.char-ava-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.char-name { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+.char-role { font-size: 12px; color: var(--text-muted); line-height: 1.3; }
+.char-tag {
+  display: inline-block; margin-top: 8px;
+  font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px;
+  background: var(--blue-light); color: var(--blue); padding: 3px 10px; border-radius: 4px;
+}
 
-  /* ─── HERO ─── */
-  .hero {
-    background: linear-gradient(135deg, #0055CC 0%, #0099FF 50%, #00C8FF 100%);
-    color: #fff;
-    padding: 60px 24px 50px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='20'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-    pointer-events: none;
-  }
-  .hero-badge {
-    display: inline-block;
-    background: rgba(255,255,255,0.2);
-    border: 1px solid rgba(255,255,255,0.35);
-    border-radius: 50px;
-    padding: 6px 18px;
-    font-size: 13px;
-    font-weight: 600;
-    margin-bottom: 20px;
-    letter-spacing: 0.5px;
-  }
-  .hero h1 {
-    font-family: 'Unbounded', sans-serif;
-    font-size: clamp(24px, 5vw, 42px);
-    font-weight: 900;
-    line-height: 1.15;
-    margin-bottom: 16px;
-    max-width: 640px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .hero p {
-    font-size: 16px;
-    opacity: 0.85;
-    max-width: 480px;
-    margin: 0 auto 32px;
-    line-height: 1.6;
-  }
-  .hero-actions {
-    display: flex;
-    gap: 12px;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-  .btn-primary {
-    background: #fff;
-    color: var(--blue);
-    border: none;
-    padding: 14px 28px;
-    border-radius: 50px;
-    font-family: 'Manrope', sans-serif;
-    font-size: 15px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.2s;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-  }
-  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,0.2); }
-  .btn-outline {
-    background: transparent;
-    color: #fff;
-    border: 2px solid rgba(255,255,255,0.6);
-    padding: 12px 24px;
-    border-radius: 50px;
-    font-family: 'Manrope', sans-serif;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .btn-outline:hover { background: rgba(255,255,255,0.15); border-color: #fff; }
+/* ── SECTIONS ── */
+.section { padding: 32px 20px; max-width: 1100px; margin: 0 auto; }
+.sec-hd { margin-bottom: 18px; }
+.sec-hd h2 { font-size: 18px; font-weight: 900; margin-bottom: 4px; color: #0D1730; letter-spacing: -0.3px; }
+.sec-hd p { font-size: 13px; color: var(--text-muted); font-weight: 500; }
 
-  /* ─── STATS ROW ─── */
-  .stats-row {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    padding: 24px;
-    max-width: 600px;
-    margin: 0 auto -20px;
-    position: relative;
-    z-index: 2;
-  }
-  .stat-card {
-    background: #fff;
-    border-radius: 16px;
-    padding: 16px;
-    text-align: center;
-    box-shadow: var(--shadow);
-    border: 1px solid var(--border);
-  }
-  .stat-num {
-    font-family: 'Unbounded', sans-serif;
-    font-size: 22px;
-    font-weight: 900;
-    color: var(--blue);
-  }
-  .stat-label { font-size: 11px; color: var(--text-muted); font-weight: 500; margin-top: 2px; }
+/* ── SITUATIONS ── */
+.sits-list { display: flex; flex-direction: column; gap: 12px; }
+.sit-card {
+  background: var(--white); border: 2px solid var(--border); border-radius: var(--radius);
+  overflow: hidden; cursor: pointer; transition: all 0.2s;
+  box-shadow: 0 3px 14px rgba(26,107,255,0.09);
+}
+.sit-card:hover { border-color: var(--blue); box-shadow: var(--shadow); }
+.sit-head { display: flex; align-items: center; gap: 14px; padding: 14px 18px; background: #fff; }
+.sit-char-img {
+  width: 48px; height: 48px; border-radius: 50%; object-fit: cover; object-position: top;
+  border: 2px solid var(--border); flex-shrink: 0; background: var(--blue-light);
+}
+.sit-info { flex: 1; }
+.sit-expert { font-size: 11px; font-weight: 800; color: var(--blue); margin-bottom: 2px; text-transform: uppercase; letter-spacing: 0.5px; }
+.sit-title { font-size: 14px; font-weight: 700; line-height: 1.3; }
+.sit-preview { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+.sit-arr { font-size: 14px; color: #fff; font-weight: 700; flex-shrink: 0; background: var(--blue); width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.sit-img-wrap {
+  width: 100%; aspect-ratio: 4/3; overflow: hidden; border-top: 1px solid var(--border);
+  background: linear-gradient(135deg, var(--blue-light) 0%, #C5D8FF 100%);
+  display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 8px;
+  color: var(--blue);
+}
+.sit-img-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+.sit-img-wrap .ph-hint { font-size: 11px; font-weight: 600; opacity: 0.55; }
 
-  /* ─── SECTION ─── */
-  .section {
-    padding: 40px 24px;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-  .section-title {
-    font-family: 'Unbounded', sans-serif;
-    font-size: 18px;
-    font-weight: 800;
-    margin-bottom: 8px;
-    color: var(--text);
-  }
-  .section-sub {
-    font-size: 14px;
-    color: var(--text-muted);
-    margin-bottom: 24px;
-    line-height: 1.5;
-  }
+/* ── LEARN ── */
+.learn-list { display: flex; flex-direction: column; gap: 10px; }
+.learn-item {
+  background: var(--card); border: 1.5px solid var(--border); border-radius: 14px;
+  padding: 15px 18px; display: flex; align-items: center; gap: 14px;
+  cursor: pointer; transition: all 0.2s; position: relative; overflow: hidden;
+  box-shadow: 0 3px 12px rgba(26,107,255,0.10);
+}
+.learn-item::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+  background: var(--step-color, var(--blue));
+}
+.learn-item:hover { border-color: var(--blue); transform: translateX(3px); box-shadow: var(--shadow); }
+.learn-num {
+  width: 34px; height: 34px; border-radius: 0;
+  background: none; border: none;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 900; color: var(--blue); flex-shrink: 0;
+}
+.learn-info { flex: 1; }
+.learn-title { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+.learn-desc { font-size: 12px; color: var(--text-muted); }
+.learn-cta { font-size: 12px; color: #fff; font-weight: 700; flex-shrink: 0; background: var(--blue); padding: 5px 13px; border-radius: 20px; white-space: nowrap; }
 
-  /* ─── LEARN PATH ─── */
-  .learn-path {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-  .learn-step {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 20px 24px;
-    cursor: pointer;
-    transition: all 0.25s;
-    display: flex;
-    align-items: center;
-    gap: 18px;
-    position: relative;
-    overflow: hidden;
-  }
-  .learn-step::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    width: 4px;
-    background: var(--step-color, var(--blue));
-    border-radius: 4px 0 0 4px;
-  }
-  .learn-step:hover {
-    border-color: var(--blue);
-    box-shadow: var(--shadow);
-    transform: translateX(4px);
-  }
-  .step-icon {
-    width: 48px; height: 48px;
-    border-radius: 14px;
-    background: var(--blue-light);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 22px;
-    flex-shrink: 0;
-  }
-  .step-info { flex: 1; }
-  .step-title { font-weight: 700; font-size: 15px; margin-bottom: 3px; }
-  .step-desc { font-size: 13px; color: var(--text-muted); line-height: 1.4; }
-  .step-badge {
-    font-size: 11px; font-weight: 700; padding: 4px 10px;
-    border-radius: 50px; flex-shrink: 0;
-  }
-  .badge-new { background: #E8F2FF; color: var(--blue); }
+/* ── CATS ── */
+.cats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.cat-card {
+  background: #1A3A6E; border: 1.5px solid #1A3A6E; border-radius: 14px;
+  padding: 20px 12px; text-align: center; cursor: pointer; transition: all 0.2s;
+  box-shadow: 0 4px 16px rgba(10,30,80,0.18);
+  color: #fff;
+}
+.cat-card:hover { background: #1E4A8A; border-color: #4488FF; transform: translateY(-3px); box-shadow: 0 8px 24px rgba(10,30,80,0.28); }
+.cat-icon-box {
+  width: 46px; height: 46px; border-radius: 12px; background: rgba(255,255,255,0.15);
+  margin: 0 auto 10px; display: flex; align-items: center; justify-content: center;
+  font-size: 8px; font-weight: 900; color: #fff; letter-spacing: -0.3px; line-height: 1.2; text-align: center;
+  border: 1.5px solid rgba(255,255,255,0.25);
+}
+.cat-name { font-size: 13px; font-weight: 700; color: #fff; }
+.cat-sub { font-size: 11px; color: rgba(255,255,255,0.65); margin-top: 2px; }
 
-  /* ─── CATEGORIES GRID with TOOLTIP ─── */
-  .categories-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-  }
-  .cat-card {
-    background: #fff;
-    border: 2px solid var(--border);
-    border-radius: var(--radius);
-    padding: 20px 14px;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.25s;
-    position: relative;
-  }
-  .cat-card:hover {
-    border-color: var(--blue);
-    box-shadow: 0 8px 28px rgba(0,119,255,0.18);
-    transform: translateY(-3px);
-  }
-  .cat-icon { font-size: 32px; margin-bottom: 8px; display: block; }
-  .cat-name { font-weight: 700; font-size: 13px; color: var(--text); }
-  .cat-type { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+/* ── TOOLTIP ── */
+.tooltip-popup {
+  position: fixed; z-index: 999; background: var(--white);
+  border: 1.5px solid var(--blue); border-radius: 13px; padding: 14px 16px;
+  max-width: 260px; box-shadow: 0 10px 36px rgba(26,107,255,0.18);
+  pointer-events: none; opacity: 0; transform: scale(0.94) translateY(-6px);
+  transition: opacity 0.16s, transform 0.16s;
+}
+.tooltip-popup.show { opacity: 1; transform: scale(1) translateY(0); }
+.tt-title { font-size: 12px; font-weight: 800; color: var(--blue); margin-bottom: 6px; }
+.tt-body { font-size: 12px; line-height: 1.55; }
+.tt-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 8px; }
+.tt-tag { font-size: 10px; font-weight: 700; background: var(--blue-light); color: var(--blue); padding: 2px 8px; border-radius: 4px; }
 
-  /* TOOLTIP */
-  .tooltip-popup {
-    position: fixed;
-    z-index: 999;
-    background: #fff;
-    border: 2px solid var(--blue);
-    border-radius: 16px;
-    padding: 18px 20px;
-    max-width: 280px;
-    box-shadow: 0 16px 48px rgba(0,119,255,0.22);
-    pointer-events: none;
-    opacity: 0;
-    transform: scale(0.92) translateY(-8px);
-    transition: opacity 0.2s, transform 0.2s;
-  }
-  .tooltip-popup.show {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
-  .tooltip-title {
-    font-family: 'Unbounded', sans-serif;
-    font-size: 13px;
-    font-weight: 800;
-    color: var(--blue);
-    margin-bottom: 8px;
-    display: flex; align-items: center; gap: 8px;
-  }
-  .tooltip-body { font-size: 13px; line-height: 1.55; color: var(--text); }
-  .tooltip-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
-  .tooltip-tag {
-    font-size: 11px; font-weight: 600;
-    background: var(--blue-light);
-    color: var(--blue);
-    padding: 3px 10px;
-    border-radius: 50px;
-  }
+/* ── TOPICS ── */
+.topics-list { display: flex; flex-direction: column; gap: 8px; }
+.topic-row {
+  background: var(--white); border: 2px solid var(--border); border-radius: 12px;
+  padding: 13px 16px; display: flex; align-items: center; gap: 12px;
+  cursor: pointer; transition: all 0.18s;
+  box-shadow: 0 3px 10px rgba(26,107,255,0.08);
+}
+.topic-row:hover { background: var(--blue-light); border-color: var(--blue); }
+.topic-label {
+  width: 26px; height: 26px; border-radius: 7px; background: var(--blue-light);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 900; color: var(--blue); flex-shrink: 0;
+}
+.topic-text { font-size: 14px; font-weight: 600; flex: 1; }
+.topic-arr { color: #fff; font-weight: 700; font-size: 13px; background: var(--blue); width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.topic-row:hover .topic-arr { background: var(--blue-dark); }
 
-  /* ─── QUICK TOPICS ─── */
-  .topics-list {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-  .topic-item {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 14px 18px;
-    cursor: pointer;
-    transition: all 0.2s;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
-  .topic-item:hover {
-    background: var(--blue-light);
-    border-color: var(--blue);
-  }
-  .topic-emoji { font-size: 20px; flex-shrink: 0; }
-  .topic-text { font-weight: 600; font-size: 14px; flex: 1; }
-  .topic-arrow { color: var(--blue); font-size: 16px; }
+/* ── CTA ── */
+.cta-block {
+  background: linear-gradient(140deg, #0A3FA0, #1A6BFF); border-radius: var(--radius);
+  padding: 28px 24px; color: #fff; text-align: center;
+}
+.cta-block h3 { font-size: 20px; font-weight: 900; margin-bottom: 8px; }
+.cta-block p { font-size: 13px; opacity: 0.8; margin-bottom: 20px; line-height: 1.55; }
 
-  /* ─── SCENARIO CARDS ─── */
-  .scenarios-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-  }
-  .scenario-card {
-    border-radius: var(--radius);
-    padding: 20px;
-    cursor: pointer;
-    transition: all 0.25s;
-    position: relative;
-    overflow: hidden;
-    min-height: 140px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  .scenario-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(0,0,0,0.12); }
-  .sc-emoji { font-size: 30px; margin-bottom: 8px; }
-  .sc-title { font-weight: 700; font-size: 14px; line-height: 1.3; }
-  .sc-cta { font-size: 12px; font-weight: 600; margin-top: 10px; opacity: 0.75; }
-  .sc-1 { background: linear-gradient(135deg, #E8F2FF, #C5DCFF); color: #0055CC; }
-  .sc-2 { background: linear-gradient(135deg, #FFF3E0, #FFD9A8); color: #CC5500; }
-  .sc-3 { background: linear-gradient(135deg, #E0FFF4, #A8FFE0); color: #007A5E; }
-  .sc-4 { background: linear-gradient(135deg, #FFE8F0, #FFB3CC); color: #CC0044; }
+/* ── MODAL ── */
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+  z-index: 500; display: none; align-items: flex-end; justify-content: center;
+  backdrop-filter: blur(4px);
+}
+.modal-overlay.open { display: flex; animation: fadeIn 0.2s; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.modal {
+  background: var(--white); border-radius: 24px 24px 0 0; width: 100%; max-width: 100%;
+  max-height: 94vh; overflow-y: auto;
+  animation: slideUp 0.28s cubic-bezier(0.34,1.4,0.64,1);
+}
+@keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+.modal-handle { width: 44px; height: 4px; background: #DDD; border-radius: 50px; margin: 14px auto 0; }
 
-  /* ─── MODAL ─── */
-  .modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.55);
-    z-index: 500;
-    display: none;
-    align-items: flex-end;
-    justify-content: center;
-    backdrop-filter: blur(4px);
-    padding: 0;
-  }
-  .modal-overlay.open { display: flex; animation: fadeIn 0.2s; }
-  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-  .modal {
-    background: #fff;
-    border-radius: 28px 28px 0 0;
-    padding: 28px 24px 40px;
-    width: 100%;
-    max-width: 640px;
-    max-height: 90vh;
-    overflow-y: auto;
-    animation: slideUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-  }
-  @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
-  .modal-handle {
-    width: 48px; height: 5px;
-    background: #E0E0E0; border-radius: 50px;
-    margin: 0 auto 22px;
-  }
-  .modal-icon { font-size: 44px; margin-bottom: 12px; }
-  .modal-title {
-    font-family: 'Unbounded', sans-serif;
-    font-size: 20px; font-weight: 800;
-    margin-bottom: 10px;
-    line-height: 1.25;
-  }
-  .modal-subtitle {
-    font-size: 14px; color: var(--text-muted);
-    margin-bottom: 24px; line-height: 1.5;
-  }
-  .modal-section-title {
-    font-weight: 700; font-size: 14px;
-    margin: 20px 0 10px;
-    color: var(--blue);
-  }
-  .info-block {
-    background: var(--blue-light);
-    border-radius: 14px;
-    padding: 16px;
-    font-size: 14px;
-    line-height: 1.6;
-    margin-bottom: 12px;
-  }
-  .info-block.green { background: #E0FFF4; }
-  .info-block.orange { background: #FFF3E0; }
-  .info-block.red { background: #FFE8F0; }
-  .checklist { display: flex; flex-direction: column; gap: 8px; }
-  .check-item {
-    display: flex; align-items: flex-start; gap: 10px;
-    font-size: 14px; line-height: 1.5;
-  }
-  .check-dot {
-    width: 22px; height: 22px; border-radius: 50%;
-    background: var(--blue); color: #fff;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 12px; font-weight: 700; flex-shrink: 0; margin-top: 1px;
-  }
-  .check-dot.green { background: var(--green); }
-  .modal-close {
-    width: 100%; margin-top: 24px;
-    background: var(--blue); color: #fff;
-    border: none; border-radius: 50px;
-    padding: 16px; font-family: 'Manrope', sans-serif;
-    font-size: 15px; font-weight: 700; cursor: pointer;
-    transition: all 0.2s;
-  }
-  .modal-close:hover { background: var(--blue-dark); }
+/* ── DIALOGUE ── */
+.dlg-img-wrap {
+  width: 100%; aspect-ratio: 5/2; overflow: hidden;
+  background: linear-gradient(135deg, var(--blue-light), #B8CFFF);
+  display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 8px; color: var(--blue);
+}
+.dlg-img-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+.dlg-img-wrap .dlg-ph-hint { font-size: 12px; font-weight: 600; opacity: 0.55; }
 
-  /* ─── QUIZ ─── */
-  .quiz-container { max-width: 640px; margin: 0 auto; }
-  .quiz-progress { display: flex; gap: 6px; margin-bottom: 28px; }
-  .q-dot {
-    flex: 1; height: 6px; border-radius: 50px;
-    background: var(--border); transition: background 0.3s;
-  }
-  .q-dot.done { background: var(--blue); }
-  .q-dot.current { background: var(--green); }
-  .quiz-card {
-    background: #fff; border-radius: var(--radius);
-    padding: 28px 24px;
-    box-shadow: var(--shadow);
-    border: 1px solid var(--border);
-    margin-bottom: 16px;
-  }
-  .quiz-q-num { font-size: 12px; color: var(--blue); font-weight: 700; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
-  .quiz-q-text { font-weight: 700; font-size: 18px; line-height: 1.4; margin-bottom: 24px; }
-  .quiz-options { display: flex; flex-direction: column; gap: 10px; }
-  .quiz-option {
-    background: var(--bg); border: 2px solid var(--border);
-    border-radius: 14px; padding: 14px 18px;
-    cursor: pointer; font-size: 15px; font-weight: 500;
-    transition: all 0.2s; text-align: left;
-  }
-  .quiz-option:hover { border-color: var(--blue); background: var(--blue-light); }
-  .quiz-option.correct { border-color: var(--green); background: #E0FFF4; color: #007A5E; }
-  .quiz-option.wrong { border-color: var(--red); background: #FFE8F0; color: #CC0044; }
-  .quiz-feedback {
-    border-radius: 14px; padding: 16px; font-size: 14px;
-    line-height: 1.5; display: none; margin-top: 12px;
-  }
-  .quiz-feedback.show { display: block; animation: fadeIn 0.3s; }
-  .quiz-feedback.correct { background: #E0FFF4; color: #007A5E; border: 1px solid var(--green); }
-  .quiz-feedback.wrong { background: #FFE8F0; color: #CC0044; border: 1px solid var(--red); }
-  .quiz-next {
-    width: 100%; padding: 15px;
-    background: var(--blue); color: #fff;
-    border: none; border-radius: 50px;
-    font-family: 'Manrope', sans-serif; font-size: 15px; font-weight: 700;
-    cursor: pointer; transition: all 0.2s; display: none;
-  }
-  .quiz-next.show { display: block; animation: fadeIn 0.3s; }
-  .quiz-next:hover { background: var(--blue-dark); }
-  .quiz-result {
-    background: linear-gradient(135deg, #0055CC, #0099FF);
-    border-radius: var(--radius); padding: 36px 24px;
-    text-align: center; color: #fff;
-    display: none;
-  }
-  .quiz-result.show { display: block; animation: fadeIn 0.5s; }
-  .result-emoji { font-size: 56px; margin-bottom: 12px; }
-  .result-score {
-    font-family: 'Unbounded', sans-serif;
-    font-size: 48px; font-weight: 900; margin: 12px 0 8px;
-  }
-  .result-label { font-size: 16px; opacity: 0.85; margin-bottom: 24px; }
-  .result-restart {
-    background: #fff; color: var(--blue);
-    border: none; border-radius: 50px; padding: 14px 32px;
-    font-family: 'Manrope', sans-serif; font-size: 15px; font-weight: 700;
-    cursor: pointer; transition: all 0.2s;
-  }
-  .result-restart:hover { transform: scale(1.04); }
+/* Аватары над чатом — горизонтальная полоска */
+.dlg-characters-bar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 20px 28px 0;
+  max-width: 860px;
+  margin: 0 auto;
+}
+.dlg-char-side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.dlg-char-side .dlg-ava-photo {
+  width: 120px; height: 120px;
+}
+.dlg-char-title-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 16px 8px;
+  gap: 4px;
+}
+.dlg-char-vs { font-size: 11px; font-weight: 800; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase; }
 
-  /* ─── CHAT ─── */
-  .chat-wrap {
-    max-width: 640px; margin: 0 auto;
-    display: flex; flex-direction: column;
-    height: calc(100vh - 200px);
-    min-height: 400px;
-  }
-  .chat-messages {
-    flex: 1; overflow-y: auto;
-    display: flex; flex-direction: column;
-    gap: 14px; padding-bottom: 16px;
-  }
-  .msg { display: flex; gap: 10px; align-items: flex-end; }
-  .msg.user { flex-direction: row-reverse; }
-  .msg-bubble {
-    max-width: 80%; padding: 12px 16px;
-    border-radius: 18px; font-size: 14px; line-height: 1.55;
-    white-space: pre-wrap;
-  }
-  .msg.bot .msg-bubble {
-    background: #fff; border: 1px solid var(--border);
-    border-bottom-left-radius: 6px;
-  }
-  .msg.user .msg-bubble {
-    background: var(--blue); color: #fff;
-    border-bottom-right-radius: 6px;
-  }
-  .msg-avatar {
-    width: 32px; height: 32px; border-radius: 50%;
-    background: var(--blue); color: #fff;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 16px; flex-shrink: 0;
-  }
-  .chat-input-row {
-    display: flex; gap: 8px; padding-top: 12px;
-    border-top: 1px solid var(--border);
-  }
-  .chat-input {
-    flex: 1; border: 2px solid var(--border);
-    border-radius: 50px; padding: 12px 18px;
-    font-family: 'Manrope', sans-serif; font-size: 14px;
-    outline: none; transition: border 0.2s;
-  }
-  .chat-input:focus { border-color: var(--blue); }
-  .chat-send {
-    background: var(--blue); color: #fff;
-    border: none; border-radius: 50px; padding: 12px 20px;
-    font-size: 18px; cursor: pointer; transition: all 0.2s;
-  }
-  .chat-send:hover { background: var(--blue-dark); transform: scale(1.05); }
-  .chat-send:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
-  .chat-suggestions {
-    display: flex; gap: 8px; flex-wrap: wrap; padding: 12px 0 8px;
-  }
-  .chat-sug {
-    background: var(--blue-light); color: var(--blue);
-    border: 1px solid var(--border); border-radius: 50px;
-    padding: 6px 14px; font-size: 12px; font-weight: 600;
-    cursor: pointer; transition: all 0.2s; white-space: nowrap;
-  }
-  .chat-sug:hover { background: var(--blue); color: #fff; }
+.dlg-body { padding: 0 0 36px; }
+.dlg-title-row {
+  display: flex; align-items: flex-start; justify-content: space-between; gap: 12px;
+  padding: 16px 28px 4px;
+  max-width: 860px; margin: 0 auto;
+}
+.dlg-title { font-size: 19px; font-weight: 900; margin-bottom: 0; }
+.dlg-sub { font-size: 13px; color: var(--text-muted); margin-bottom: 16px; line-height: 1.5; padding: 0 28px; max-width: 860px; margin-left: auto; margin-right: auto; display: block; }
 
-  .typing-indicator {
-    display: flex; gap: 5px; align-items: center; padding: 12px 16px;
-    background: #fff; border: 1px solid var(--border);
-    border-radius: 18px; border-bottom-left-radius: 6px;
-    max-width: 80px;
-  }
-  .typing-dot {
-    width: 8px; height: 8px; background: var(--text-muted);
-    border-radius: 50%; animation: typingBounce 1.2s infinite;
-  }
-  .typing-dot:nth-child(2) { animation-delay: 0.15s; }
-  .typing-dot:nth-child(3) { animation-delay: 0.3s; }
-  @keyframes typingBounce {
-    0%, 60%, 100% { transform: translateY(0); }
-    30% { transform: translateY(-6px); }
-  }
+/* Чат — простой, без сетки, сообщения на всю ширину */
+.dialogue {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  cursor: pointer; user-select: none;
+  padding: 0 28px;
+  max-width: 860px;
+  margin: 0 auto;
+}
 
-  @media (max-width: 480px) {
-    .categories-grid { grid-template-columns: repeat(2, 1fr); }
-    .scenarios-grid { grid-template-columns: 1fr; }
-  }
+/* Аватары по бокам — оставляем классы но скрываем, они теперь в dlg-characters-bar */
+.dlg-ava-left, .dlg-ava-right { display: none; }
+
+.dlg-ava-photo {
+  width: 120px; height: 120px; border-radius: 50%;
+  overflow: hidden; border: 3px solid var(--border);
+  background: var(--blue-light);
+}
+.dlg-ava-photo img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.dlg-ava-photo.v {
+  background: var(--blue); border-color: var(--blue);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 36px; font-weight: 900; color: #fff;
+}
+.dlg-ava-photo.v img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+.dlg-ava-label {
+  font-size: 12px; font-weight: 700; color: var(--text-muted);
+  text-align: center; line-height: 1.2;
+}
+
+/* Центральная колонка — теперь это просто .dlg-messages */
+.dlg-messages {
+  display: flex; flex-direction: column; gap: 10px;
+  padding: 0;
+}
+
+/* Сообщения */
+.msg-row { display: flex; }
+.msg-row.vanya { justify-content: flex-end; }
+.msg-row:not(.vanya) { justify-content: flex-start; }
+
+.msg-inner { display: flex; flex-direction: column; max-width: 72%; }
+.msg-row.vanya .msg-inner { align-items: flex-end; }
+.msg-name { font-size: 10px; font-weight: 700; color: var(--text-muted); margin-bottom: 3px; }
+.msg-row.vanya .msg-name { color: var(--blue); }
+.msg-bubble {
+  padding: 12px 16px; border-radius: 18px;
+  font-size: 15px; line-height: 1.6; font-weight: 500; word-break: break-word;
+}
+.msg-row:not(.vanya) .msg-bubble {
+  background: #EDF1FC; border: 1px solid var(--border); border-bottom-left-radius: 4px;
+}
+.msg-row.vanya .msg-bubble {
+  background: var(--blue); color: #fff;
+  border-bottom-right-radius: 4px;
+}
+
+.dlg-tap-hint {
+  text-align: center; font-size: 11px; color: var(--text-muted);
+  font-weight: 600; padding: 10px 0 2px; opacity: 0.7;
+}
+
+.dlg-outcomes-wrap { padding: 0 28px; max-width: 860px; margin: 0 auto; }
+.dlg-outcome { margin-top: 14px; border-radius: 14px; padding: 15px; font-size: 14px; line-height: 1.6; }
+.dlg-outcome.good { background: #E6FAF4; border: 1.5px solid #B2EDD8; color: #0A5C3A; }
+.dlg-outcome.bad { background: #FEE8E8; border: 1.5px solid #FFBBBB; color: #7A0000; }
+.dlg-outcome-title { font-weight: 800; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+.dlg-close-wrap { padding: 0 28px; max-width: 860px; margin: 0 auto; }
+.dlg-close {
+  width: 100%; margin-top: 18px; background: var(--blue); color: #fff;
+  border: none; border-radius: 12px; padding: 15px;
+  font-family: 'Golos Text', sans-serif; font-size: 15px; font-weight: 700;
+  cursor: pointer; transition: all 0.18s;
+  box-shadow: 0 4px 16px rgba(26,107,255,0.35);
+}
+.dlg-close:hover { background: var(--blue-dark); transform: translateY(-1px); }
+
+.dlg-skip-btn {
+  flex-shrink: 0;
+  background: transparent; color: var(--text-muted);
+  border: 1.5px solid var(--border); border-radius: 8px;
+  padding: 5px 14px; font-family: 'Golos Text', sans-serif;
+  font-size: 12px; font-weight: 700; cursor: pointer;
+  transition: all 0.18s; white-space: nowrap; margin-top: 2px;
+}
+.dlg-skip-btn:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-light); }
+
+/* ── GENERIC MODAL ── */
+.modal-pad { padding: 20px 20px 36px; }
+.modal-title { font-size: 19px; font-weight: 900; margin-bottom: 8px; line-height: 1.25; }
+.modal-sub { font-size: 13px; color: var(--text-muted); margin-bottom: 18px; line-height: 1.6; }
+.modal-sec { font-size: 11px; font-weight: 800; color: var(--blue); text-transform: uppercase; letter-spacing: 0.6px; margin: 16px 0 8px; }
+.info-card { background: var(--blue-light); border-radius: 12px; padding: 13px; font-size: 14px; line-height: 1.6; margin-bottom: 9px; }
+.info-card.green { background: #E6FAF4; }
+.info-card.orange { background: #FFF3E6; }
+.info-card.red { background: #FEE8E8; }
+.steps-list { display: flex; flex-direction: column; gap: 12px; }
+.step-row { display: flex; gap: 12px; align-items: flex-start; font-size: 14px; line-height: 1.55; }
+/* Без кружочков — просто жирный номер */
+.step-dot {
+  font-size: 15px; font-weight: 900; color: var(--blue);
+  flex-shrink: 0; min-width: 20px; margin-top: 0; line-height: 1.55;
+}
+.step-dot.g { color: var(--green); }
+
+
+/* ── SECTION STRIPES ── */
+/* Full-bleed colored bands behind each section */
+.section-stripe-blue   { background: #EBF2FF; padding-top: 40px; padding-bottom: 40px; max-width: 100%; }
+.section-stripe-neutral{ background: #F0F4FA; max-width: 100%; padding-top: 40px; padding-bottom: 40px; }
+.section-stripe-purple { background: #EBF2FF; max-width: 100%; padding-top: 40px; padding-bottom: 40px; }
+.section-stripe-green  { background: #EBF2FF; max-width: 100%; padding-top: 40px; padding-bottom: 40px; }
+/* Inner content still constrained */
+.section-stripe-blue > *,
+.section-stripe-neutral > *,
+.section-stripe-purple > *,
+.section-stripe-green > * { max-width: 1100px; margin-left: auto; margin-right: auto; }
+.section-stripe-blue,
+.section-stripe-neutral,
+.section-stripe-purple,
+.section-stripe-green { padding-left: 20px; padding-right: 20px; }
+
+/* ── QUIZ ── */
+.quiz-wrap { max-width: 1100px; margin: 0 auto; }
+.quiz-bar { display: flex; gap: 4px; margin-bottom: 20px; }
+.qbar-seg { flex: 1; height: 6px; border-radius: 50px; background: #C2CFEA; transition: background 0.3s; }
+.qbar-seg.done { background: var(--blue); }
+.qbar-seg.cur { background: var(--green); }
+.quiz-card { background: var(--white); border-radius: var(--radius); padding: 24px 20px; box-shadow: 0 6px 28px rgba(26,107,255,0.13); border: 2px solid var(--border); margin-bottom: 14px; }
+.quiz-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.quiz-num { font-size: 11px; font-weight: 800; color: var(--blue); text-transform: uppercase; letter-spacing: 1px; }
+.quiz-cat { font-size: 10px; font-weight: 700; background: var(--blue-light); color: var(--blue); padding: 2px 9px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+.quiz-q { font-size: 17px; font-weight: 800; line-height: 1.45; margin-bottom: 20px; }
+.quiz-opts { display: flex; flex-direction: column; gap: 9px; }
+.quiz-opt { background: #F0F4FA; border: 2px solid #B8C8E8; border-radius: 12px; padding: 14px 18px; cursor: pointer; font-size: 15px; font-weight: 600; transition: all 0.18s; text-align: left; font-family: 'Golos Text', sans-serif; color: #1A1A2E; }
+.quiz-opt:hover { border-color: var(--blue); background: #D8E8FF; color: var(--blue-dark); }
+.quiz-opt.correct { border-color: var(--green); background: #E6FAF4; color: #0A5C3A; font-weight: 600; }
+.quiz-opt.wrong { border-color: var(--red); background: #FEE8E8; color: #7A0000; }
+.quiz-fb { border-radius: 12px; overflow: hidden; display: none; margin-top: 12px; border: 1.5px solid transparent; }
+.quiz-fb.show { display: block; animation: fadeIn 0.25s; }
+.quiz-fb.correct { border-color: #B2EDD8; }
+.quiz-fb.wrong { border-color: #FFBBBB; }
+.quiz-fb-img-wrap { width: 100%; aspect-ratio: 5/3; overflow: hidden; background: var(--blue-light); }
+.quiz-fb-img-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+.quiz-fb-img-ph { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; color: var(--blue); font-size: 11px; font-weight: 600; opacity: 0.6; }
+.quiz-fb-text { padding: 13px 15px; font-size: 14px; line-height: 1.55; }
+.quiz-fb.correct .quiz-fb-text { background: #E6FAF4; color: #0A5C3A; }
+.quiz-fb.wrong .quiz-fb-text { background: #FEE8E8; color: #7A0000; }
+.quiz-next { width: 100%; padding: 16px; background: var(--blue); color: #fff; border: none; border-radius: 12px; font-family: 'Golos Text', sans-serif; font-size: 16px; font-weight: 700; cursor: pointer; transition: all 0.18s; display: none; box-shadow: 0 4px 16px rgba(26,107,255,0.35); letter-spacing: 0.2px; }
+.quiz-next.show { display: block; animation: fadeIn 0.25s; }
+.quiz-next:hover { background: var(--blue-dark); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(26,107,255,0.45); }
+
+/* Result */
+.quiz-result { background: var(--white); border-radius: var(--radius); border: 1.5px solid var(--border); overflow: hidden; display: none; box-shadow: var(--shadow); }
+.quiz-result.show { display: block; animation: fadeIn 0.4s; }
+.res-img-wrap { width: 100%; aspect-ratio: 5/3; background: linear-gradient(135deg, var(--blue-light), #B8CFFF); overflow: hidden; position: relative; }
+.res-img-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+.res-img-ph { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; color: var(--blue); font-size: 12px; font-weight: 600; opacity: 0.6; }
+.res-body { background: linear-gradient(140deg, #0A3FA0, #1A6BFF); padding: 28px 24px 32px; color: #fff; text-align: center; }
+.res-stars { font-size: 28px; letter-spacing: 8px; margin-bottom: 10px; }
+.res-score-label { font-size: 14px; opacity: 0.75; margin-bottom: 4px; }
+.res-score { font-size: 52px; font-weight: 900; line-height: 1; margin-bottom: 8px; }
+.res-label { font-size: 15px; opacity: 0.88; margin-bottom: 20px; line-height: 1.5; }
+.res-breakdown { background: rgba(255,255,255,0.12); border-radius: 12px; padding: 14px 16px; margin-bottom: 20px; text-align: left; display: flex; flex-direction: column; gap: 10px; }
+.res-cat-row { display: flex; align-items: center; gap: 10px; }
+.res-cat-name { font-size: 12px; font-weight: 600; opacity: 0.85; width: 130px; flex-shrink: 0; }
+.res-cat-bar-wrap { flex: 1; height: 6px; background: rgba(255,255,255,0.2); border-radius: 50px; overflow: hidden; }
+.res-cat-bar { height: 100%; background: #fff; border-radius: 50px; transition: width 0.6s ease; }
+.res-cat-score { font-size: 12px; font-weight: 700; opacity: 0.8; width: 28px; text-align: right; flex-shrink: 0; }
+.res-restart { background: #fff; color: var(--blue); border: none; border-radius: 10px; padding: 13px 30px; font-family: 'Golos Text', sans-serif; font-size: 15px; font-weight: 700; cursor: pointer; transition: transform 0.18s; }
+.res-restart:hover { transform: scale(1.04); }
+
+/* ── CHAT ── */
+.chat-wrap { max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; height: calc(100vh - 180px); min-height: 420px; }
+.chat-msgs { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; padding-bottom: 12px; }
+.chat-row { display: flex; gap: 9px; align-items: flex-end; }
+.chat-row.user { flex-direction: row-reverse; }
+.chat-ava { width: 30px; height: 30px; border-radius: 50%; flex-shrink: 0; background: var(--blue); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; }
+.chat-bubble { max-width: 78%; padding: 11px 14px; border-radius: 16px; font-size: 14px; line-height: 1.6; white-space: pre-wrap; }
+.chat-row:not(.user) .chat-bubble { background: var(--white); border: 1.5px solid var(--border); border-bottom-left-radius: 4px; }
+.chat-row.user .chat-bubble { background: var(--blue); color: #fff; border-bottom-right-radius: 4px; }
+.chat-sugs { display: flex; gap: 7px; flex-wrap: wrap; padding: 10px 0 6px; }
+.chat-sug { background: var(--blue-light); color: var(--blue); border: 1px solid var(--border); border-radius: 8px; padding: 6px 13px; font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.18s; white-space: nowrap; }
+.chat-sug:hover { background: var(--blue); color: #fff; }
+.chat-input-row { display: flex; gap: 8px; padding-top: 10px; border-top: 1px solid var(--border); }
+.chat-input { flex: 1; border: 2px solid var(--border); border-radius: 10px; padding: 11px 16px; font-family: 'Golos Text', sans-serif; font-size: 14px; outline: none; transition: border 0.18s; }
+.chat-input:focus { border-color: var(--blue); }
+.chat-send { background: var(--blue); color: #fff; border: none; border-radius: 10px; padding: 11px 18px; font-size: 16px; cursor: pointer; transition: all 0.18s; }
+.chat-send:hover { background: var(--blue-dark); }
+.chat-send:disabled { opacity: 0.4; cursor: not-allowed; }
+.typing-ind { display: flex; gap: 5px; align-items: center; padding: 12px 15px; background: var(--white); border: 1.5px solid var(--border); border-radius: 16px; border-bottom-left-radius: 4px; width: fit-content; }
+.typing-dot { width: 7px; height: 7px; background: var(--text-muted); border-radius: 50%; animation: bounce 1.3s infinite; }
+.typing-dot:nth-child(2) { animation-delay: 0.18s; }
+.typing-dot:nth-child(3) { animation-delay: 0.36s; }
+@keyframes bounce { 0%,60%,100%{transform:translateY(0)} 30%{transform:translateY(-6px)} }
+
+/* Появление сообщения */
+.msg-appear {
+  animation: msgPop 0.3s cubic-bezier(0.34,1.5,0.64,1);
+}
+@keyframes msgPop {
+  from { opacity: 0; transform: scale(0.88) translateY(6px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Фото Вани в аватаре диалога */
+.msg-ava.v {
+  background: var(--blue); border-color: var(--blue);
+  overflow: hidden;
+}
+.msg-ava.v img { width:100%;height:100%;object-fit:cover;object-position:top; }
+
+@media(max-width:520px){
+  .chars-grid{grid-template-columns:repeat(2,1fr)}
+  .cats-grid{grid-template-columns:repeat(2,1fr)}
+  .char-ava-wrap{width:120px;height:120px}
+  .dialogue{grid-template-columns:90px 1fr 90px}
+  .dlg-ava-photo{width:76px;height:76px}
+}
 </style>
 </head>
 <body>
 
 <header class="header">
-  <div class="header-logo"><span>🛡️</span> СтраховаНЯ</div>
-  <nav class="header-nav">
+  <div class="logo">Страхо<em>ВАНЯ</em></div>
+  <nav class="nav">
     <button class="nav-btn active" onclick="showPage('home')">Главная</button>
     <button class="nav-btn" onclick="showPage('quiz')">Квиз</button>
-    <button class="nav-btn" onclick="showPage('chat')">Чат</button>
+    <button class="nav-btn" onclick="showPage('chat')">Чат с ИИ</button>
   </nav>
 </header>
 
 <div class="tooltip-popup" id="tooltipPopup">
-  <div class="tooltip-title" id="ttTitle"></div>
-  <div class="tooltip-body" id="ttBody"></div>
-  <div class="tooltip-tags" id="ttTags"></div>
+  <div class="tt-title" id="ttTitle"></div>
+  <div class="tt-body" id="ttBody"></div>
+  <div class="tt-tags" id="ttTags"></div>
 </div>
 
-<!-- HOME -->
+<!-- ══ HOME ══ -->
 <div class="page active" id="page-home">
+
   <div class="hero">
-    <h1>Страхование —<br>просто и понятно</h1>
-    <p>Узнай, как страхование защищает тебя каждый день: телефон, поездки, здоровье и не только</p>
-    <div class="hero-actions">
-      <button class="btn-primary" onclick="scrollToLearn()">🚀 Начать обучение</button>
-      <button class="btn-outline" onclick="showPage('chat')">💬 Задать вопрос</button>
+    <div class="hero-eyebrow">Для подростков 11–18 лет</div>
+    <h1>Страхование — просто,<br>когда рядом друзья</h1>
+    <p>Ваня постоянно попадает в истории. Его друзья-эксперты объясняют, как страхование работает в реальной жизни</p>
+    <div class="hero-btns">
+      <button class="btn-white" onclick="document.getElementById('sits-section').scrollIntoView({behavior:'smooth'})">Смотреть истории</button>
+      <button class="btn-ghost" onclick="showPage('chat')">Задать вопрос ИИ</button>
     </div>
   </div>
 
-  <div class="stats-row">
-    <div class="stat-card"><div class="stat-num">6</div><div class="stat-label">тем</div></div>
-    <div class="stat-card"><div class="stat-num">10</div><div class="stat-label">вопросов</div></div>
-    <div class="stat-card"><div class="stat-num">5 мин</div><div class="stat-label">на всё</div></div>
-  </div>
+  <div class="vanya-section">
+    <div class="vanya-inner">
+      <div class="vanya-row">
+        <div class="vanya-ava-big">
+          <img src="vanya.jpg" alt="Ваня"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
+            style="width:100%;height:100%;object-fit:cover;object-position:top;border-radius:50%;display:block">
+          <span style="display:none;align-items:center;justify-content:center;width:100%;height:100%;font-size:34px;font-weight:900;color:#fff">В</span>
+        </div>
+        <div class="vanya-text">
+          <h2>Привет, я Ваня</h2>
+          <p>Мне 16 лет. Я учусь в школе, занимаюсь спортивной гимнастикой и постоянно куда-то езжу с семьёй. Раньше слово «страхование» меня моментально вгоняло в скуку — казалось, это что-то для взрослых с машинами и ипотеками.<br><br>Но потом я разбил телефон на тренировке, в отпуске пропал наш чемодан, а на соревнованиях сломал запястье. После каждой истории оказывалось, что страховка могла бы сэкономить кучу денег и нервов. Хорошо, что у меня есть знакомые, которые в этом разбираются.</p>
+        </div>
+      </div>
 
-  <div class="section" id="learn-section">
-    <div class="section-title">📚 Путь обучения</div>
-    <div class="section-sub">Пройди шаги по порядку, чтобы разобраться в страховании с нуля</div>
-    <div class="learn-path">
-      <div class="learn-step" style="--step-color:#0077FF" onclick="openLearnModal('what')">
-        <div class="step-icon" style="background:#E8F2FF">🤔</div>
-        <div class="step-info"><div class="step-title">Что такое страхование?</div><div class="step-desc">Как работает механизм — риск, взнос, выплата</div></div>
-        <span class="step-badge badge-new">Начать →</span>
-      </div>
-      <div class="learn-step" style="--step-color:#FF7A1A" onclick="openLearnModal('types')">
-        <div class="step-icon" style="background:#FFF3E0">📋</div>
-        <div class="step-info"><div class="step-title">Виды страхования</div><div class="step-desc">ОСАГО, КАСКО, ОМС, путешествия и другие</div></div>
-        <span class="step-badge badge-new">Начать →</span>
-      </div>
-      <div class="learn-step" style="--step-color:#00C897" onclick="openLearnModal('teen')">
-        <div class="step-icon" style="background:#E0FFF4">👤</div>
-        <div class="step-info"><div class="step-title">Страхование для подростка</div><div class="step-desc">Что доступно до 18 лет: гаджеты, спорт, поездки</div></div>
-        <span class="step-badge badge-new">Начать →</span>
-      </div>
-      <div class="learn-step" style="--step-color:#FF4D6A" onclick="openLearnModal('case')">
-        <div class="step-icon" style="background:#FFE8F0">🚨</div>
-        <div class="step-info"><div class="step-title">Страховой случай: что делать?</div><div class="step-desc">Пошаговая инструкция — кому звонить и куда идти</div></div>
-        <span class="step-badge badge-new">Начать →</span>
-      </div>
-      <div class="learn-step" style="--step-color:#FFD93D" onclick="openLearnModal('terms')">
-        <div class="step-icon" style="background:#FFFBE0">📖</div>
-        <div class="step-info"><div class="step-title">Словарик терминов</div><div class="step-desc">Премия, франшиза, полис — простыми словами</div></div>
-        <span class="step-badge badge-new">Начать →</span>
+      <div class="chars-label">Эксперты Вани</div>
+      <div class="chars-grid">
+        <div class="char-card" onclick="openCharModal('jason')">
+          <div class="char-ava-wrap"><img src="jason.png" alt="Джейсон"></div>
+          <div class="char-name">Джейсон</div>
+          <div class="char-role">Бывший профи, тренер</div>
+          <div class="char-tag">Спорт и НС</div>
+        </div>
+        <div class="char-card" onclick="openCharModal('jordan')">
+          <div class="char-ava-wrap"><img src="jordan.png" alt="Джордан"></div>
+          <div class="char-name">Джордан</div>
+          <div class="char-role">Предприниматель</div>
+          <div class="char-tag">Гаджеты и поездки</div>
+        </div>
+        <div class="char-card" onclick="openCharModal('buffett')">
+          <div class="char-ava-wrap"><img src="buffett.png" alt="Баффет"></div>
+          <div class="char-name">Баффет</div>
+          <div class="char-role">Финансовый мудрец</div>
+          <div class="char-tag">Имущество</div>
+        </div>
+        <div class="char-card" onclick="openCharModal('sherlock')">
+          <div class="char-ava-wrap"><img src="sherlock.png" alt="Шерлок"></div>
+          <div class="char-name">Шерлок</div>
+          <div class="char-role">Аналитик и детектив</div>
+          <div class="char-tag">Договоры и полисы</div>
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="section">
-    <div class="section-title">🗂️ Категории страхования</div>
-    <div class="section-sub">Наведи на карточку, чтобы узнать подробнее</div>
-    <div class="categories-grid">
+  <!-- SITUATIONS -->
+  <div class="section section-stripe-blue" id="sits-section">
+    <div class="sec-hd">
+      <h2>Ванины истории</h2>
+      <p>Реальные ситуации — что произошло, как объяснил эксперт, и что значит страховка</p>
+    </div>
+    <div class="sits-list">
+
+      <div class="sit-card" onclick="openDialogue('phone')">
+        <div class="sit-head">
+          <img src="jason.png" class="sit-char-img" alt="Джейсон">
+          <div class="sit-info">
+            <div class="sit-expert">Джейсон</div>
+            <div class="sit-title">Разбил телефон на тренировке</div>
+            <div class="sit-preview">Ваня уронил iPhone во время разминки — экран вдребезги...</div>
+          </div>
+          <div class="sit-arr">›</div>
+        </div>
+        <div class="sit-img-wrap" id="siw-phone">
+          <img src="incident_phone.jpg" alt="" onerror="this.style.display='none';document.getElementById('siph-phone').style.display='flex'">
+          <div id="siph-phone" style="display:none;flex-direction:column;align-items:center;gap:6px">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18"/></svg>
+            <span class="ph-hint">incident_phone.jpg</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sit-card" onclick="openDialogue('trip')">
+        <div class="sit-head">
+          <img src="jordan.png" class="sit-char-img" alt="Джордан">
+          <div class="sit-info">
+            <div class="sit-expert">Джордан</div>
+            <div class="sit-title">Потерял чемодан в аэропорту</div>
+            <div class="sit-preview">Семья прилетела в Турцию, а сумки нет на ленте выдачи...</div>
+          </div>
+          <div class="sit-arr">›</div>
+        </div>
+        <div class="sit-img-wrap">
+          <img src="incident_trip.jpg" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div style="display:none;flex-direction:column;align-items:center;gap:6px">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="8" width="16" height="13" rx="2"/><path d="M8 8V6a4 4 0 018 0v2"/><line x1="12" y1="13" x2="12" y2="16"/></svg>
+            <span class="ph-hint">incident_trip.jpg</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sit-card" onclick="openDialogue('sport')">
+        <div class="sit-head">
+          <img src="jason.png" class="sit-char-img" alt="Джейсон">
+          <div class="sit-info">
+            <div class="sit-expert">Джейсон</div>
+            <div class="sit-title">Перелом на соревнованиях</div>
+            <div class="sit-preview">На финале Ваня упал и сломал запястье — операция 35 000 ₽...</div>
+          </div>
+          <div class="sit-arr">›</div>
+        </div>
+        <div class="sit-img-wrap">
+          <img src="incident_sport.jpg" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div style="display:none;flex-direction:column;align-items:center;gap:6px">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 3"/></svg>
+            <span class="ph-hint">incident_sport.jpg</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sit-card" onclick="openDialogue('flood')">
+        <div class="sit-head">
+          <img src="buffett.png" class="sit-char-img" alt="Баффет">
+          <div class="sit-info">
+            <div class="sit-expert">Баффет</div>
+            <div class="sit-title">Затопили соседи сверху</div>
+            <div class="sit-preview">Ваня вернулся домой и увидел потоп в комнате...</div>
+          </div>
+          <div class="sit-arr">›</div>
+        </div>
+        <div class="sit-img-wrap">
+          <img src="incident_flood.jpg" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div style="display:none;flex-direction:column;align-items:center;gap:6px">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 18s1-1 2-1 2 1 2 1 1-1 2-1 2 1 2 1 1-1 2-1 2 1 2 1 1-1 2-1"/><path d="M3 14s1-1 2-1 2 1 2 1 1-1 2-1 2 1 2 1 1-1 2-1 2 1 2 1 1-1 2-1"/><line x1="12" y1="2" x2="12" y2="9"/><path d="M8 6l4-4 4 4"/></svg>
+            <span class="ph-hint">incident_flood.jpg</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sit-card" onclick="openDialogue('contract')">
+        <div class="sit-head">
+          <img src="sherlock.png" class="sit-char-img" alt="Шерлок">
+          <div class="sit-info">
+            <div class="sit-expert">Шерлок</div>
+            <div class="sit-title">Непонятный договор страхования</div>
+            <div class="sit-preview">Родители купили полис, но никто не понимает что там написано...</div>
+          </div>
+          <div class="sit-arr">›</div>
+        </div>
+        <div class="sit-img-wrap">
+          <img src="incident_contract.jpg" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div style="display:none;flex-direction:column;align-items:center;gap:6px">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            <span class="ph-hint">incident_contract.jpg</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- LEARN PATH -->
+  <div class="section section-stripe-neutral">
+    <div class="sec-hd"><h2>Путь обучения</h2><p>Пять шагов — от нуля до уверенного понимания страхования</p></div>
+    <div class="learn-list">
+      <div class="learn-item" style="--step-color:#1A6BFF" onclick="openLearnModal('what')">
+        <div class="learn-num">01</div>
+        <div class="learn-info"><div class="learn-title">Что такое страхование?</div><div class="learn-desc">Риск, взнос, выплата — как работает механизм</div></div>
+        <div class="learn-cta">Читать</div>
+      </div>
+      <div class="learn-item" style="--step-color:#F76707" onclick="openLearnModal('types')">
+        <div class="learn-num" style="color:#F76707">02</div>
+        <div class="learn-info"><div class="learn-title">Виды страхования</div><div class="learn-desc">ОСАГО, КАСКО, ОМС, путешествия и другие</div></div>
+        <div class="learn-cta">Читать</div>
+      </div>
+      <div class="learn-item" style="--step-color:#12B886" onclick="openLearnModal('teen')">
+        <div class="learn-num" style="color:#12B886">03</div>
+        <div class="learn-info"><div class="learn-title">Страхование для подростка</div><div class="learn-desc">Что доступно до 18 лет: гаджеты, спорт, поездки</div></div>
+        <div class="learn-cta">Читать</div>
+      </div>
+      <div class="learn-item" style="--step-color:#E03131" onclick="openLearnModal('case')">
+        <div class="learn-num" style="color:#E03131">04</div>
+        <div class="learn-info"><div class="learn-title">Страховой случай: что делать?</div><div class="learn-desc">Пошаговая инструкция — кому звонить и куда идти</div></div>
+        <div class="learn-cta">Читать</div>
+      </div>
+      <div class="learn-item" style="--step-color:#845EF7" onclick="openLearnModal('terms')">
+        <div class="learn-num" style="color:#845EF7">05</div>
+        <div class="learn-info"><div class="learn-title">Словарик терминов</div><div class="learn-desc">Премия, франшиза, полис — простыми словами</div></div>
+        <div class="learn-cta">Читать</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CATEGORIES -->
+  <div class="section section-stripe-purple">
+    <div class="sec-hd"><h2>Категории страхования</h2><p>Наведи на карточку — появится подсказка. Кликни — читай подробнее</p></div>
+    <div class="cats-grid">
       <div class="cat-card" onmouseenter="showTooltip(event,'osago')" onmouseleave="hideTooltip()" onclick="openCatModal('osago')">
-        <span class="cat-icon">🚗</span><div class="cat-name">ОСАГО</div><div class="cat-type">Обязательное авто</div>
+        <div class="cat-icon-box">ОСАГО</div><div class="cat-name">ОСАГО</div><div class="cat-sub">Обязательное авто</div>
       </div>
       <div class="cat-card" onmouseenter="showTooltip(event,'kasko')" onmouseleave="hideTooltip()" onclick="openCatModal('kasko')">
-        <span class="cat-icon">🔐</span><div class="cat-name">КАСКО</div><div class="cat-type">Доброволь. авто</div>
+        <div class="cat-icon-box">КАСКО</div><div class="cat-name">КАСКО</div><div class="cat-sub">Доброволь. авто</div>
       </div>
       <div class="cat-card" onmouseenter="showTooltip(event,'med')" onmouseleave="hideTooltip()" onclick="openCatModal('med')">
-        <span class="cat-icon">🏥</span><div class="cat-name">ОМС / ДМС</div><div class="cat-type">Медицина</div>
+        <div class="cat-icon-box">ОМС</div><div class="cat-name">ОМС / ДМС</div><div class="cat-sub">Медицина</div>
       </div>
       <div class="cat-card" onmouseenter="showTooltip(event,'travel')" onmouseleave="hideTooltip()" onclick="openCatModal('travel')">
-        <span class="cat-icon">✈️</span><div class="cat-name">Путешествия</div><div class="cat-type">Турстраховка</div>
+        <div class="cat-icon-box" style="font-size:7px">ТУРИЗМ</div><div class="cat-name">Путешествия</div><div class="cat-sub">Турстраховка</div>
       </div>
       <div class="cat-card" onmouseenter="showTooltip(event,'property')" onmouseleave="hideTooltip()" onclick="openCatModal('property')">
-        <span class="cat-icon">📱</span><div class="cat-name">Имущество</div><div class="cat-type">Вещи и гаджеты</div>
+        <div class="cat-icon-box" style="font-size:7px">ВЕЩИ</div><div class="cat-name">Имущество</div><div class="cat-sub">Вещи и гаджеты</div>
       </div>
       <div class="cat-card" onmouseenter="showTooltip(event,'life')" onmouseleave="hideTooltip()" onclick="openCatModal('life')">
-        <span class="cat-icon">❤️</span><div class="cat-name">Жизнь и НС</div><div class="cat-type">Несчастный случай</div>
+        <div class="cat-icon-box">НС</div><div class="cat-name">Жизнь и НС</div><div class="cat-sub">Несчастный случай</div>
       </div>
     </div>
   </div>
 
-  <div class="section">
-    <div class="section-title">🎮 Жизненные ситуации</div>
-    <div class="section-sub">Узнай, как страхование работает на реальных примерах</div>
-    <div class="scenarios-grid">
-      <div class="scenario-card sc-1" onclick="openScenario('phone')"><div class="sc-emoji">📱</div><div class="sc-title">Разбил телефон на тренировке</div><div class="sc-cta">Посмотреть сценарий →</div></div>
-      <div class="scenario-card sc-2" onclick="openScenario('trip')"><div class="sc-emoji">✈️</div><div class="sc-title">Отменили рейс за границу</div><div class="sc-cta">Посмотреть сценарий →</div></div>
-      <div class="scenario-card sc-3" onclick="openScenario('sport')"><div class="sc-emoji">⚽</div><div class="sc-title">Травма на соревнованиях</div><div class="sc-cta">Посмотреть сценарий →</div></div>
-      <div class="scenario-card sc-4" onclick="openScenario('event')"><div class="sc-emoji">🎫</div><div class="sc-title">Отменили концерт или поход</div><div class="sc-cta">Посмотреть сценарий →</div></div>
-    </div>
-  </div>
-
-  <div class="section">
-    <div class="section-title">⚡ Быстрые ответы</div>
-    <div class="section-sub">Часто задаваемые вопросы</div>
+  <!-- QUICK TOPICS -->
+  <div class="section section-stripe-green">
+    <div class="sec-hd"><h2>Быстрые ответы</h2><p>Самые частые вопросы о страховании</p></div>
     <div class="topics-list">
-      <div class="topic-item" onclick="openTopicModal('premium')"><span class="topic-emoji">💰</span><span class="topic-text">Что такое страховая премия и франшиза?</span><span class="topic-arrow">→</span></div>
-      <div class="topic-item" onclick="openTopicModal('howpay')"><span class="topic-emoji">💳</span><span class="topic-text">Как получить страховую выплату?</span><span class="topic-arrow">→</span></div>
-      <div class="topic-item" onclick="openTopicModal('dtp')"><span class="topic-emoji">🚨</span><span class="topic-text">Что делать при ДТП?</span><span class="topic-arrow">→</span></div>
-      <div class="topic-item" onclick="openTopicModal('under18')"><span class="topic-emoji">🧒</span><span class="topic-text">Можно ли застраховать вещи до 18 лет?</span><span class="topic-arrow">→</span></div>
+      <div class="topic-row" onclick="openTopicModal('premium')">
+        <div class="topic-label">₽</div>
+        <span class="topic-text">Что такое страховая премия и франшиза?</span>
+        <span class="topic-arr">→</span>
+      </div>
+      <div class="topic-row" onclick="openTopicModal('howpay')">
+        <div class="topic-label">→</div>
+        <span class="topic-text">Как получить страховую выплату?</span>
+        <span class="topic-arr">→</span>
+      </div>
+      <div class="topic-row" onclick="openTopicModal('dtp')">
+        <div class="topic-label">!</div>
+        <span class="topic-text">Что делать при ДТП?</span>
+        <span class="topic-arr">→</span>
+      </div>
+      <div class="topic-row" onclick="openTopicModal('under18')">
+        <div class="topic-label">?</div>
+        <span class="topic-text">Можно ли застраховать вещи до 18 лет?</span>
+        <span class="topic-arr">→</span>
+      </div>
     </div>
   </div>
 
+  <!-- CTA -->
   <div class="section">
-    <div style="background: linear-gradient(135deg, #0055CC, #0099FF); border-radius: var(--radius); padding: 28px 24px; color: #fff; text-align: center;">
-      <div style="font-size: 40px; margin-bottom: 12px;">🧠</div>
-      <div style="font-family: 'Unbounded', sans-serif; font-size: 18px; font-weight: 800; margin-bottom: 8px;">Проверь себя!</div>
-      <div style="font-size: 14px; opacity: 0.85; margin-bottom: 20px; line-height: 1.5;">10 вопросов о страховании. Узнай, насколько хорошо ты всё понял</div>
-      <button class="btn-primary" onclick="showPage('quiz')">Пройти квиз →</button>
+    <div class="cta-block">
+      <h3>Проверь себя</h3>
+      <p>10 вопросов по страхованию — узнай, насколько хорошо ты всё понял после историй Вани</p>
+      <button class="btn-white" onclick="showPage('quiz')">Пройти квиз</button>
     </div>
   </div>
+
 </div>
 
-<!-- QUIZ -->
+<!-- ══ QUIZ ══ -->
 <div class="page" id="page-quiz">
   <div class="section">
-    <div class="section-title">🧠 Квиз по страхованию</div>
-    <div class="section-sub">10 вопросов — проверь, что усвоил</div>
-    <div class="quiz-container">
-      <div class="quiz-progress" id="quizProgress"></div>
+    <div class="sec-hd"><h2>Квиз по страхованию</h2><p>15 вопросов — проверь себя после историй Вани</p></div>
+    <div class="quiz-wrap">
+      <div class="quiz-bar" id="quizBar"></div>
       <div id="quizArea">
         <div class="quiz-card">
-          <div class="quiz-q-num" id="qNum">Вопрос 1 из 10</div>
-          <div class="quiz-q-text" id="qText">Загрузка...</div>
-          <div class="quiz-options" id="qOptions"></div>
-          <div class="quiz-feedback" id="qFeedback"></div>
+          <div class="quiz-meta">
+            <span class="quiz-num" id="qNum">Вопрос 1 из 15</span>
+            <span class="quiz-cat" id="qCat"></span>
+          </div>
+          <div class="quiz-q" id="qText">Загрузка...</div>
+          <div class="quiz-opts" id="qOpts"></div>
+          <div class="quiz-fb" id="qFeedback">
+            <div class="quiz-fb-img-wrap" id="qImgWrap" style="display:none">
+              <img id="qImg" src="" alt="" onerror="this.parentElement.style.display='none'">
+              <div class="quiz-fb-img-ph" id="qImgPh" style="display:none">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                <span id="qImgName"></span>
+              </div>
+            </div>
+            <div class="quiz-fb-text" id="qFbText"></div>
+          </div>
         </div>
-        <button class="quiz-next" id="qNext" onclick="nextQuestion()">Следующий вопрос →</button>
+        <button class="quiz-next" id="qNext" onclick="nextQ()">Следующий вопрос</button>
       </div>
       <div class="quiz-result" id="quizResult">
-        <div class="result-emoji" id="resultEmoji">🎉</div>
-        <div style="font-size: 16px; opacity: 0.85;">Ты набрал</div>
-        <div class="result-score" id="resultScore">0/10</div>
-        <div class="result-label" id="resultLabel">Отличный результат!</div>
-        <button class="result-restart" onclick="restartQuiz()">Пройти ещё раз 🔄</button>
+        <div class="res-img-wrap" id="resImgWrap">
+          <img src="quiz_result.jpg" alt="Результат"
+            onerror="this.style.display='none';document.getElementById('resImgPh').style.display='flex'">
+          <div class="res-img-ph" id="resImgPh">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <span>quiz_result.jpg</span>
+          </div>
+        </div>
+        <div class="res-body">
+          <div class="res-stars" id="resStars"></div>
+          <div class="res-score-label">Ты набрал</div>
+          <div class="res-score" id="resScore">0/15</div>
+          <div class="res-label" id="resLabel"></div>
+          <div class="res-breakdown" id="resBreakdown"></div>
+          <button class="res-restart" onclick="initQuiz()">Пройти ещё раз</button>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- CHAT -->
+<!-- ══ CHAT ══ -->
 <div class="page" id="page-chat">
   <div class="section">
-    <div class="section-title">💬 Умный помощник</div>
-    <div class="section-sub">Задавай любые вопросы о страховании — отвечу просто и понятно</div>
+    <div class="sec-hd"><h2>Умный помощник</h2><p>Задай любой вопрос о страховании — ответит как другу</p></div>
     <div class="chat-wrap">
-      <div class="chat-messages" id="chatMessages">
-        <div class="msg bot">
-          <div class="msg-avatar">🛡️</div>
-          <div class="msg-bubble">Привет! Я помогу разобраться в страховании. Что хочешь узнать? 😊</div>
+      <div class="chat-msgs" id="chatMsgs">
+        <div class="chat-row">
+          <div class="chat-ava">В</div>
+          <div class="chat-bubble">Привет! Я помогу разобраться в страховании. Что хочешь узнать?</div>
         </div>
       </div>
-      <div class="chat-suggestions">
-        <span class="chat-sug" onclick="sendSuggest(this)">Что такое полис?</span>
-        <span class="chat-sug" onclick="sendSuggest(this)">Как работает ОСАГО?</span>
-        <span class="chat-sug" onclick="sendSuggest(this)">Что такое франшиза?</span>
-        <span class="chat-sug" onclick="sendSuggest(this)">Страховка для подростка?</span>
+      <div class="chat-sugs">
+        <span class="chat-sug" onclick="sendSug(this)">Что такое полис?</span>
+        <span class="chat-sug" onclick="sendSug(this)">Как работает ОСАГО?</span>
+        <span class="chat-sug" onclick="sendSug(this)">Что такое франшиза?</span>
+        <span class="chat-sug" onclick="sendSug(this)">Страховка для подростка?</span>
       </div>
       <div class="chat-input-row">
-        <input class="chat-input" id="chatInput" placeholder="Напиши вопрос..." onkeydown="if(event.key==='Enter') sendChat()">
+        <input class="chat-input" id="chatInput" placeholder="Напиши вопрос..." onkeydown="if(event.key==='Enter')sendChat()">
         <button class="chat-send" id="chatSendBtn" onclick="sendChat()">➤</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- MODALS -->
-<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
-  <div class="modal" id="modalContent">
+<!-- ══ MODAL ══ -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
+  <div class="modal" id="modalEl">
     <div class="modal-handle"></div>
     <div id="modalBody"></div>
-    <button class="modal-close" onclick="closeModalDirect()">Понятно ✓</button>
   </div>
 </div>
 
 <script>
-// ── PAGE NAV ──
-function showPage(id) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('page-' + id).classList.add('active');
-  const labels = ['home','quiz','chat'];
-  document.querySelectorAll('.nav-btn')[labels.indexOf(id)]?.classList.add('active');
-  if (id === 'quiz') initQuiz();
-  if (id === 'chat') document.getElementById('chatInput').focus();
-  window.scrollTo(0, 0);
-}
-function scrollToLearn() {
-  document.getElementById('learn-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  ['home','quiz','chat'].forEach((n,i)=>{if(n===id)document.querySelectorAll('.nav-btn')[i].classList.add('active');});
+  if(id==='quiz')initQuiz();
+  if(id==='chat')document.getElementById('chatInput').focus();
+  window.scrollTo(0,0);
 }
 
-// ── TOOLTIP ──
-const tooltipData = {
-  osago: { title: '🚗 ОСАГО', body: 'Обязательное страхование автогражданской ответственности. Без него ездить на машине в России незаконно. Покрывает ущерб другим участникам ДТП.', tags: ['Обязательное', 'Авто', 'До 400 000 ₽'] },
-  kasko: { title: '🔐 КАСКО', body: 'Добровольная страховка твоего автомобиля — от угона, аварии, стихийных бедствий. Стоит дороже ОСАГО, зато защищает и твою машину тоже.', tags: ['Добровольное', 'Авто', 'Полное покрытие'] },
-  med: { title: '🏥 ОМС / ДМС', body: 'ОМС — бесплатная медицина по полису (есть у всех россиян). ДМС — платная расширенная страховка: частные клиники, быстрая запись, больше услуг.', tags: ['ОМС — бесплатно', 'ДМС — платно', 'Медицина'] },
-  travel: { title: '✈️ Туристическая страховка', body: 'Защищает в поездке: болезнь за рубежом, отмена рейса, потеря багажа. Стоит от 300 ₽ в день и может сэкономить десятки тысяч.', tags: ['Заграница', 'Отмена рейса', 'Болезнь'] },
-  property: { title: '📱 Страхование имущества', body: 'Можно застраховать телефон, ноутбук, квартиру. При краже, поломке или пожаре — получишь компенсацию. Особенно актуально для дорогих гаджетов.', tags: ['Гаджеты', 'Квартира', 'Кража'] },
-  life: { title: '❤️ Страхование жизни и НС', body: 'НС (несчастный случай) — покрывает травмы, переломы, операции. Страхование жизни — выплаты семье в случае смерти. Для спортсменов — особенно важно.', tags: ['Травмы', 'Спорт', 'НС'] }
+// TOOLTIP
+const ttData={
+  osago:{title:'ОСАГО',body:'Обязательная страховка для всех водителей. Без неё ездить незаконно. Покрывает ущерб другим участникам ДТП.',tags:['Обязательное','До 400 000 ₽','Авто']},
+  kasko:{title:'КАСКО',body:'Добровольная страховка твоего автомобиля: угон, авария, стихийные бедствия, повреждения на парковке.',tags:['Добровольное','Авто','Полное покрытие']},
+  med:{title:'ОМС / ДМС',body:'ОМС — бесплатная медицина по полису, есть у всех. ДМС — платная расширенная страховка с доступом в частные клиники.',tags:['ОМС — бесплатно','ДМС — платно']},
+  travel:{title:'Туристическая',body:'Защищает в поездке: болезнь за рубежом, отмена рейса, потеря багажа. Стоит от 300 ₽ в день.',tags:['Заграница','Отмена рейса','Багаж']},
+  property:{title:'Имущество',body:'Телефон, ноутбук, квартира. При краже, поломке или пожаре — компенсация. 1–3% от стоимости вещи в год.',tags:['Гаджеты','Квартира','Кража']},
+  life:{title:'Жизнь и НС',body:'НС — покрывает травмы, переломы, операции. Важно для спортсменов и активных людей.',tags:['Травмы','Спорт','НС']}
 };
-let hideTimer;
-function showTooltip(e, catId) {
-  clearTimeout(hideTimer);
-  const d = tooltipData[catId];
-  const popup = document.getElementById('tooltipPopup');
-  document.getElementById('ttTitle').textContent = d.title;
-  document.getElementById('ttBody').textContent = d.body;
-  document.getElementById('ttTags').innerHTML = d.tags.map(t => `<span class="tooltip-tag">${t}</span>`).join('');
-  const rect = e.currentTarget.getBoundingClientRect();
-  let left = rect.left + rect.width / 2;
-  let top = rect.top - 160;
-  popup.style.left = Math.min(left - 140, window.innerWidth - 296) + 'px';
-  popup.style.top = (top < 10 ? rect.bottom + 10 : top) + 'px';
-  popup.classList.add('show');
+let ttTimer;
+function showTooltip(e,key){
+  clearTimeout(ttTimer);
+  const d=ttData[key],p=document.getElementById('tooltipPopup');
+  document.getElementById('ttTitle').textContent=d.title;
+  document.getElementById('ttBody').textContent=d.body;
+  document.getElementById('ttTags').innerHTML=d.tags.map(t=>`<span class="tt-tag">${t}</span>`).join('');
+  const r=e.currentTarget.getBoundingClientRect();
+  let top=r.top-155,left=r.left+r.width/2-130;
+  if(top<8)top=r.bottom+8;
+  p.style.top=top+'px';
+  p.style.left=Math.max(8,Math.min(left,window.innerWidth-276))+'px';
+  p.classList.add('show');
 }
-function hideTooltip() {
-  hideTimer = setTimeout(() => document.getElementById('tooltipPopup').classList.remove('show'), 200);
-}
+function hideTooltip(){ttTimer=setTimeout(()=>document.getElementById('tooltipPopup').classList.remove('show'),180);}
 
-// ── MODALS ──
-const learnContent = {
-  what: { icon: '🤔', title: 'Что такое страхование?', html: `<p class="modal-subtitle">Страхование — это когда много людей скидываются на общий фонд, а если у кого-то случилась беда — деньги из этого фонда помогают возместить ущерб.</p><div class="info-block"><strong>Как это работает:</strong><br><br>Представь: 1000 человек платят по 100 ₽ в год. Итого 100 000 ₽. Если у одного разобьётся телефон за 80 000 ₽ — страховая компания выплатит ему из этого фонда.</div><div class="modal-section-title">Ключевые понятия</div><div class="checklist"><div class="check-item"><div class="check-dot">1</div><div><strong>Страховой риск</strong> — возможное плохое событие (авария, болезнь, кража)</div></div><div class="check-item"><div class="check-dot">2</div><div><strong>Страховой взнос (премия)</strong> — деньги, которые ты платишь за страховку</div></div><div class="check-item"><div class="check-dot">3</div><div><strong>Страховой случай</strong> — когда плохое событие реально произошло</div></div><div class="check-item"><div class="check-dot">4</div><div><strong>Страховая выплата</strong> — деньги, которые тебе вернут при страховом случае</div></div></div>` },
-  types: { icon: '📋', title: 'Виды страхования', html: `<p class="modal-subtitle">Страхование бывает разным — в зависимости от того, что ты хочешь защитить.</p><div class="info-block"><strong>🚗 ОСАГО</strong> — обязательная автостраховка. Покрывает ущерб другим при ДТП.</div><div class="info-block orange"><strong>🔐 КАСКО</strong> — добровольная. Защищает твой автомобиль от угона, аварий, стихий.</div><div class="info-block green"><strong>🏥 ОМС / ДМС</strong> — медицинская. ОМС — бесплатно всем. ДМС — платно, но с доступом в лучшие клиники.</div><div class="info-block"><strong>✈️ Туристическая</strong> — защита в путешествиях. Лечение за рубежом, отмена рейса, потеря багажа.</div><div class="info-block red"><strong>📱 Имущество</strong> — страховка вещей. Телефон, ноутбук, квартира.</div><div class="info-block orange"><strong>❤️ НС и жизнь</strong> — выплаты при травме или смерти. Очень важно для спортсменов.</div>` },
-  teen: { icon: '👤', title: 'Страхование для подростка', html: `<p class="modal-subtitle">До 18 лет страховку оформляют родители, но защищает она именно тебя.</p><div class="modal-section-title">Что актуально для тебя</div><div class="checklist"><div class="check-item"><div class="check-dot green">✓</div><div><strong>Гаджеты</strong> — застрахуй телефон или ноутбук от поломки и кражи. Стоит 1–3% от стоимости вещи в год.</div></div><div class="check-item"><div class="check-dot green">✓</div><div><strong>Спорт и НС</strong> — страховка от несчастного случая покрывает травмы на тренировках.</div></div><div class="check-item"><div class="check-dot green">✓</div><div><strong>Путешествия</strong> — перед поездкой за рубеж родители обязаны оформить туристическую страховку.</div></div><div class="check-item"><div class="check-dot green">✓</div><div><strong>ОМС</strong> — у тебя уже есть! Полис выдаётся при рождении или в поликлинике.</div></div></div><div class="info-block green" style="margin-top:16px">💡 Попроси родителей застраховать твой телефон — это дёшево и очень полезно!</div>` },
-  case: { icon: '🚨', title: 'Страховой случай: что делать?', html: `<p class="modal-subtitle">Случилась неприятность? Не паникуй — действуй по шагам.</p><div class="checklist"><div class="check-item"><div class="check-dot" style="background:#FF4D6A">1</div><div><strong>Сообщи о событии</strong> — позвони на горячую линию страховой компании сразу после события.</div></div><div class="check-item"><div class="check-dot" style="background:#FF7A1A">2</div><div><strong>Зафиксируй ущерб</strong> — сфотографируй или сними видео. Это главное доказательство.</div></div><div class="check-item"><div class="check-dot" style="background:#FFD93D">3</div><div><strong>Собери документы</strong> — полис, паспорт, справки.</div></div><div class="check-item"><div class="check-dot" style="background:#00C897">4</div><div><strong>Подай заявление</strong> — в офисе страховой или онлайн.</div></div><div class="check-item"><div class="check-dot">5</div><div><strong>Получи выплату</strong> — обычно в течение 10–30 рабочих дней.</div></div></div><div class="info-block red" style="margin-top:16px">⚠️ Не тяни с обращением — большинство компаний требуют сообщить в течение 3–5 дней!</div>` },
-  terms: { icon: '📖', title: 'Словарик терминов', html: `<p class="modal-subtitle">Главные слова, которые встречаются в страховании — объясняем просто.</p><div class="info-block"><strong>Полис</strong> — документ, подтверждающий что ты застрахован.</div><div class="info-block orange"><strong>Страховая премия</strong> — деньги, которые ты платишь страховой компании за услугу.</div><div class="info-block green"><strong>Франшиза</strong> — сумма, которую ты сам оплачиваешь при страховом случае. Например, франшиза 5000 ₽, ущерб 20 000 ₽ — страховая платит 15 000 ₽, ты доплачиваешь 5 000 ₽.</div><div class="info-block"><strong>Страховая сумма</strong> — максимальная сумма выплаты.</div><div class="info-block red"><strong>Исключение</strong> — случай, который страховая НЕ покрывает. Обязательно читай этот раздел в полисе!</div>` }
-};
-const catContent = {
-  osago: { icon: '🚗', title: 'ОСАГО', html: `<p class="modal-subtitle">Обязательное страхование автогражданской ответственности — самая первая страховка, о которой узнают водители.</p><div class="info-block"><strong>Что покрывает:</strong> Ущерб другим людям и их машинам, если ты виноват в ДТП. До 400 000 ₽ — имущество, до 500 000 ₽ — вред здоровью.</div><div class="info-block orange"><strong>Что НЕ покрывает:</strong> Свой автомобиль, если ты виноват. Для этого нужно КАСКО.</div><div class="info-block green"><strong>Стоимость:</strong> В среднем 5 000–15 000 ₽ в год.</div>` },
-  kasko: { icon: '🔐', title: 'КАСКО', html: `<p class="modal-subtitle">Добровольная страховка автомобиля — защищает твою машину в любой ситуации.</p><div class="info-block"><strong>Что покрывает:</strong> Угон, авария по твоей вине, стихийные бедствия, повреждения на парковке.</div><div class="info-block orange"><strong>Стоимость:</strong> 3–10% от стоимости авто в год.</div><div class="info-block green"><strong>Франшиза в КАСКО:</strong> Можно выбрать страховку с франшизой — тогда взнос меньше, но часть ущерба платишь сам.</div>` },
-  med: { icon: '🏥', title: 'ОМС и ДМС', html: `<p class="modal-subtitle">Медицинское страхование — есть у каждого россиянина с рождения.</p><div class="info-block"><strong>ОМС (обязательное):</strong> Бесплатные поликлиники, больницы, скорая помощь.</div><div class="info-block orange"><strong>ДМС (добровольное):</strong> Частные клиники без очередей, расширенный список услуг. Стоит 15 000–50 000 ₽ в год.</div><div class="info-block green"><strong>Для тебя:</strong> У тебя уже есть полис ОМС!</div>` },
-  travel: { icon: '✈️', title: 'Туристическая страховка', html: `<p class="modal-subtitle">Незаменима в поездках за рубеж — лечение за границей может стоить миллионы рублей.</p><div class="info-block"><strong>Что покрывает:</strong> Медицинская помощь за рубежом, эвакуация, отмена/задержка рейса, потеря багажа.</div><div class="info-block orange"><strong>Стоимость:</strong> От 300 ₽ в день.</div><div class="info-block green"><strong>Лайфхак:</strong> Покупай страховку сразу при бронировании!</div><div class="info-block red"><strong>Важно:</strong> Шенген требует страховку на минимум 30 000 € для визы.</div>` },
-  property: { icon: '📱', title: 'Страхование имущества', html: `<p class="modal-subtitle">Защити свои вещи — от телефона до квартиры.</p><div class="info-block"><strong>Гаджеты:</strong> Телефон, ноутбук можно застраховать от кражи, поломки, падения. Стоит ~1–3% от цены вещи.</div><div class="info-block orange"><strong>Квартира:</strong> Страховка от пожара, затопления, кражи. Базовая защита — от 1 500 ₽ в год.</div><div class="info-block green"><strong>Для подростков:</strong> Родители могут застраховать твой телефон!</div>` },
-  life: { icon: '❤️', title: 'Страхование жизни и НС', html: `<p class="modal-subtitle">Страховка от несчастных случаев — особенно актуальна если занимаешься спортом.</p><div class="info-block"><strong>НС (несчастный случай):</strong> Покрывает травмы — переломы, вывихи, операции. Стоит от 1 000 ₽ в год.</div><div class="info-block orange"><strong>Страхование жизни:</strong> Выплата семье при смерти застрахованного.</div><div class="info-block green"><strong>Для спортсменов:</strong> Многие секции требуют полис НС обязательно.</div>` }
-};
-const scenarioContent = {
-  phone: { icon: '📱', title: 'Разбил телефон на тренировке', html: `<p class="modal-subtitle">Ситуация: Во время тренировки телефон выпал и разбился. Стоимость ремонта — 12 000 ₽.</p><div class="modal-section-title">Без страховки</div><div class="info-block red">Ремонт за свой счёт — 12 000 ₽.</div><div class="modal-section-title">Со страховкой имущества</div><div class="info-block green">Страховка стоила 1 500 ₽ в год. Страховая выплатила 10 000 ₽ (за вычетом франшизы 2 000 ₽).<br><br><strong>Итог:</strong> 3 500 ₽ вместо 12 000 ₽ 🎉</div>` },
-  trip: { icon: '✈️', title: 'Отменили рейс за границу', html: `<p class="modal-subtitle">Ситуация: Рейс отменили. Авиакомпания предлагает рейс через 2 суток.</p><div class="modal-section-title">Без страховки</div><div class="info-block red">Отель оплачен — деньги потеряны. Питание и гостиница в аэропорту — за свой счёт.</div><div class="modal-section-title">С туристической страховкой</div><div class="info-block green">Покрытие: до 15 000 ₽ — гостиница и питание при задержке более 6 часов 💪</div>` },
-  sport: { icon: '⚽', title: 'Травма на соревнованиях', html: `<p class="modal-subtitle">Ситуация: На футбольных соревнованиях сломал ногу. Лечение и реабилитация — 35 000 ₽.</p><div class="modal-section-title">Без страховки НС</div><div class="info-block red">Реабилитация, физиотерапия, лекарства — за свой счёт.</div><div class="modal-section-title">С полисом НС</div><div class="info-block green">Полис НС стоил 2 500 ₽ в год. При страховой сумме 300 000 ₽ и переломе — выплата ~30 000 ₽.<br><br><strong>Итог:</strong> Почти полное покрытие лечения!</div>` },
-  event: { icon: '🎫', title: 'Отменили концерт', html: `<p class="modal-subtitle">Ситуация: Купил билеты на концерт за 5 000 ₽, но его отменили.</p><div class="modal-section-title">Без страховки</div><div class="info-block red">Организаторы вернули только 50% — потеря 2 500 ₽.</div><div class="modal-section-title">Со страховкой отмены</div><div class="info-block green">Большинство расходов компенсировала страховая 🎉</div><div class="info-block orange">💡 При покупке дорогих билетов — проверь, можно ли добавить страховку отмены. Стоит ~5–10% от цены.</div>` }
-};
-const topicContent = {
-  premium: { icon: '💰', title: 'Премия и франшиза', html: `<div class="info-block"><strong>Страховая премия</strong> — деньги, которые ты платишь страховой компании. Как абонентская плата за защиту.</div><div class="info-block orange"><strong>Франшиза</strong> — твоя «доля» в ущербе.<br><br>Пример: Франшиза 5 000 ₽, ущерб 20 000 ₽ → страховая платит 15 000 ₽, ты — 5 000 ₽.</div><div class="info-block green"><strong>Зачем нужна франшиза?</strong><br>С франшизой страховка стоит дешевле!</div>` },
-  howpay: { icon: '💳', title: 'Как получить выплату?', html: `<div class="checklist"><div class="check-item"><div class="check-dot">1</div><div><strong>Сообщи о случае</strong> — позвони на горячую линию страховой в течение 3–5 дней.</div></div><div class="check-item"><div class="check-dot">2</div><div><strong>Зафиксируй ущерб</strong> — фото, видео, справки.</div></div><div class="check-item"><div class="check-dot">3</div><div><strong>Подай заявление</strong> — в офисе, онлайн или через приложение.</div></div><div class="check-item"><div class="check-dot">4</div><div><strong>Приложи документы</strong> — полис, паспорт и подтверждающие документы.</div></div><div class="check-item"><div class="check-dot green">5</div><div><strong>Получи выплату</strong> — обычно 10–30 рабочих дней.</div></div></div>` },
-  dtp: { icon: '🚨', title: 'Что делать при ДТП?', html: `<div class="checklist"><div class="check-item"><div class="check-dot" style="background:#FF4D6A">1</div><div><strong>Стоп!</strong> Не трогай машину. Включи аварийку. Выставь знаки.</div></div><div class="check-item"><div class="check-dot" style="background:#FF7A1A">2</div><div><strong>Вызови скорую и ГИБДД</strong> если есть пострадавшие.</div></div><div class="check-item"><div class="check-dot" style="background:#FFD93D">3</div><div><strong>Сфотографируй</strong> место аварии, повреждения, номера участников.</div></div><div class="check-item"><div class="check-dot">4</div><div><strong>Обменяйся данными</strong> — ФИО, номер полиса ОСАГО.</div></div><div class="check-item"><div class="check-dot green">5</div><div><strong>Сообщи в страховую</strong> — в течение 5 рабочих дней.</div></div></div><div class="info-block green" style="margin-top:16px">Европротокол: если нет пострадавших и ущерб менее 100 000 ₽ — можно оформить без ГИБДД.</div>` },
-  under18: { icon: '🧒', title: 'Страховка до 18 лет', html: `<p class="modal-subtitle">До 18 лет страховой договор заключают родители. Но защищает она тебя!</p><div class="checklist"><div class="check-item"><div class="check-dot green">✓</div><div>Гаджеты (телефон, ноутбук) — страховка имущества</div></div><div class="check-item"><div class="check-dot green">✓</div><div>Здоровье при занятиях спортом — полис НС</div></div><div class="check-item"><div class="check-dot green">✓</div><div>Путешествия — туристическая страховка</div></div><div class="check-item"><div class="check-dot green">✓</div><div>ОМС — уже есть!</div></div></div><div class="info-block orange" style="margin-top:16px">С 14 лет можно получить свой полис ОМС (по паспорту).</div>` }
-};
-
-function openModal(bodyHtml) {
-  document.getElementById('modalBody').innerHTML = bodyHtml;
+// MODAL
+function openModal(html){
+  document.getElementById('modalBody').innerHTML=html;
   document.getElementById('modalOverlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
+  document.body.style.overflow='hidden';
 }
-function buildModalHtml(data) {
-  return `<div class="modal-icon">${data.icon}</div><div class="modal-title">${data.title}</div>${data.html}`;
-}
-function openLearnModal(key) { openModal(buildModalHtml(learnContent[key])); }
-function openCatModal(key) { openModal(buildModalHtml(catContent[key])); }
-function openScenario(key) { openModal(buildModalHtml(scenarioContent[key])); }
-function openTopicModal(key) { openModal(buildModalHtml(topicContent[key])); }
-function closeModal(e) { if (e.target === document.getElementById('modalOverlay')) closeModalDirect(); }
-function closeModalDirect() {
-  document.getElementById('modalOverlay').classList.remove('open');
-  document.body.style.overflow = '';
+function closeModal(){document.getElementById('modalOverlay').classList.remove('open');document.body.style.overflow='';}
+function closeModalOutside(e){if(e.target===document.getElementById('modalOverlay'))closeModal();}
+const CB=`<button class="dlg-close" onclick="closeModal()">Понятно</button>`;
+
+// DIALOGUES
+const dialogues={
+  phone:{
+    img:'incident_phone.jpg',emoji:'📱',imgFile:'incident_phone.jpg',
+    title:'Разбил телефон на тренировке',
+    sub:'Ваня уронил смартфон во время разминки. Экран разбит. Ремонт — 14 000 ₽.',
+    expert:{name:'Джейсон',img:'jason.png'},
+    msgs:[
+      {w:'v',t:'Джейсон, я разбил телефон на тренировке. Экран вдребезги. Ремонт стоит 14 тысяч, у меня нет таких денег...'},
+      {w:'e',t:'Ваня, неприятно. А у тебя была страховка на телефон?'},
+      {w:'v',t:'Нет, я вообще не знал, что телефон можно застраховать.'},
+      {w:'e',t:'Можно! Это называется страхование имущества. На телефон за 60 тысяч страховка стоит примерно 1 500–2 000 ₽ в год.'},
+      {w:'v',t:'Это же 150 рублей в месяц? И что, они бы оплатили ремонт?'},
+      {w:'e',t:'Не полностью — есть франшиза, обычно 2 000–3 000 ₽. Ты бы заплатил только её. Вместо 14 000 отдал бы 2 000–3 000 ₽.'},
+      {w:'v',t:'Надо попросить родителей оформить страховку на следующий телефон...'},
+      {w:'e',t:'До 18 лет договор заключают родители, но страховка защищает именно тебя. Поговори — это реально дёшево.'},
+    ],
+    good:{title:'Со страховкой',text:'Ремонт 14 000 ₽ → ты платишь только франшизу 2 000–3 000 ₽. Страховка за год стоит около 1 500 ₽.'},
+    bad:{title:'Без страховки',text:'Платишь полную стоимость ремонта — 14 000 ₽ из своего кармана или копишь на новый телефон.'}
+  },
+  trip:{
+    img:'incident_trip.jpg',emoji:'🧳',imgFile:'incident_trip.jpg',
+    title:'Потерял чемодан в аэропорту',
+    sub:'Семья Вани прилетела в Турцию. На ленте выдачи их чемодан не появился.',
+    expert:{name:'Джордан',img:'jordan.png'},
+    msgs:[
+      {w:'v',t:'Джордан, мы приземлились, а нашего чемодана нет. Стоим у ленты уже час. Что делать?!'},
+      {w:'e',t:'Спокойно. Иди прямо в стойку Lost & Found в аэропорту. Напишите заявление о потере, получите PIR-номер.'},
+      {w:'v',t:'Написали. Говорят, найдут через 3–5 дней. Но у нас там все вещи!'},
+      {w:'e',t:'У вас была туристическая страховка?'},
+      {w:'v',t:'Мама говорит, что купили. Но мы не смотрели что там написано.'},
+      {w:'e',t:'Позвоните на горячую линию страховой прямо сейчас. Большинство полисов покрывают задержку багажа — до 500–1 000 $ на покупку вещей первой необходимости.'},
+      {w:'v',t:'То есть они дадут деньги на одежду и средства гигиены?'},
+      {w:'e',t:'Именно. Сохраняйте все чеки — они нужны для возмещения. Если чемодан не найдут, получите компенсацию за потерянные вещи.'},
+    ],
+    good:{title:'Со страховкой',text:'Покрытие задержки багажа — до 500 $. Чеки на вещи первой необходимости будут возмещены. Поездка не испорчена.'},
+    bad:{title:'Без страховки',text:'Покупаешь всё сам. Неделя без вещей — расходы 10 000–30 000 ₽ в зависимости от содержимого чемодана.'}
+  },
+  sport:{
+    img:'incident_sport.jpg',emoji:'🦴',imgFile:'incident_sport.jpg',
+    title:'Перелом на соревнованиях',
+    sub:'Ваня выступал на соревнованиях по спортивной гимнастике. Неудачное приземление — перелом запястья. Операция и реабилитация — 35 000 ₽.',
+    expert:{name:'Джейсон',img:'jason.png'},
+    msgs:[
+      {w:'v',t:'Джейсон, я сломал руку на соревнованиях по гимнастике. Неудачно приземлился после снаряда. Говорят, нужна операция и реабилитация. Мама в шоке от счёта — 35 000 ₽.'},
+      {w:'e',t:'Ваня, сочувствую. Твоя секция оформляла тебе страховой полис НС — несчастный случай?'},
+      {w:'v',t:'Я не знаю... тренер что-то говорил про страховку в начале сезона, но я не вникал.'},
+      {w:'e',t:'Срочно спроси у тренера или родителей — есть ли полис НС. Многие секции оформляют его обязательно. Он покрывает именно такие ситуации.'},
+      {w:'v',t:'Мама нашла бумагу, говорит, есть страховая сумма 300 000 ₽.'},
+      {w:'e',t:'Отлично. Перелом запястья в таблице выплат обычно 8–12% от страховой суммы. Это 24 000–36 000 ₽. Почти полное покрытие.'},
+      {w:'v',t:'Нужно как-то подать заявление?'},
+      {w:'e',t:'Да. Звони в страховую, неси справку из больницы с диагнозом, выписки и чеки за лечение. Выплата — в течение 30 дней.'},
+    ],
+    good:{title:'С полисом НС',text:'Выплата 24 000–36 000 ₽ при переломе запястья. Полис НС стоил ~2 500 ₽ в год — секция могла оплатить его сама.'},
+    bad:{title:'Без полиса НС',text:'Операция и реабилитация — 35 000 ₽ полностью за свой счёт. ОМС покрывает только базовую медпомощь.'}
+  },
+  flood:{
+    img:'incident_flood.jpg',emoji:'🚰',imgFile:'incident_flood.jpg',
+    title:'Затопили соседи сверху',
+    sub:'Ваня вернулся домой и увидел мокрый потолок и лужи. Соседи забыли закрыть кран. Ущерб — 40 000 ₽.',
+    expert:{name:'Баффет',img:'buffett.png'},
+    msgs:[
+      {w:'v',t:'Баффет, у нас потоп! Соседи залили. Потолок обвалился, паркет вздулся. Сосед говорит, денег нет...'},
+      {w:'e',t:'Первое — зафотографируй всё прямо сейчас. Каждый угол, каждое пятно. Это доказательства.'},
+      {w:'v',t:'Сделал. Но как нам получить деньги на ремонт, если сосед не платит?'},
+      {w:'e',t:'Вы вызывали управляющую компанию? Они составляют акт о затоплении — без него никуда.'},
+      {w:'v',t:'Сейчас вызвали. Баффет, а у нас есть страховка на квартиру?'},
+      {w:'e',t:'Если есть — звоните страховщику сразу. Страховка имущества покрывает затопление по вине соседей. Проверьте сумму покрытия в договоре — бывает до 100 000–300 000 ₽.'},
+      {w:'v',t:'Мы платим около 1 500 ₽ в год за квартиру. Это и есть страховка?'},
+      {w:'e',t:'Да, базовый полис — обычно покрывает именно такой случай. Главное — подать заявление в течение 3 дней и приложить акт от УК.'},
+    ],
+    good:{title:'Со страховкой имущества',text:'Страховая покрывает ремонт потолка, пола и отделки. Полис ~1 500 ₽ в год. Ремонт 40 000 ₽ не ложится на семью.'},
+    bad:{title:'Без страховки',text:'Взыскивать с соседа через суд — месяцы ожидания. Или делать ремонт за свой счёт: 30 000–60 000 ₽.'}
+  },
+  contract:{
+    img:'incident_contract.jpg',emoji:'📄',imgFile:'incident_contract.jpg',
+    title:'Непонятный договор страхования',
+    sub:'Родители Вани купили полис перед поездкой, но никто не может понять что в нём написано.',
+    expert:{name:'Шерлок',img:'sherlock.png'},
+    msgs:[
+      {w:'v',t:'Шерлок, у нас есть страховой полис, но он на 8 страниц мелким шрифтом. Что вообще читать в первую очередь?'},
+      {w:'e',t:'В любом полисе три ключевых раздела. Запомни: страховые случаи, исключения и страховая сумма.'},
+      {w:'v',t:'Что такое исключения?'},
+      {w:'e',t:'Исключения — список ситуаций, при которых страховая не заплатит. Обычно: алкоголь, экстремальный спорт без доп. пакета, умышленный вред.'},
+      {w:'v',t:'То есть если я упаду с сёрфинга, не заплатят?'},
+      {w:'e',t:'Зависит от полиса. Если куплен пакет «активный отдых» — заплатят. Без него — нет. Именно это надо проверять до поездки.'},
+      {w:'v',t:'А что такое страховая сумма?'},
+      {w:'e',t:'Максимум, который выплатят. Например, «медицинские расходы до 30 000 €». Для Европы — минимальный порог. Лучше брать от 50 000 €.'},
+      {w:'v',t:'Понял. Надо читать исключения и проверять суммы до покупки, а не после.'},
+      {w:'e',t:'Именно. И сохраняй все чеки в поездке — они нужны для выплаты.'},
+    ],
+    good:{title:'Если прочитать полис до поездки',text:'Знаешь что покрыто, а что нет. Можешь докупить нужный пакет. Никаких сюрпризов при страховом случае.'},
+    bad:{title:'Если не читать',text:'Узнаёшь об исключениях только когда что-то случилось. Страховая может отказать в выплате — и будет права по договору.'}
+  }
+};
+
+function openDialogue(key){
+  const d = dialogues[key];
+  const modal = document.getElementById('modalEl');
+
+  const imgHtml = `
+    <div class="dlg-img-wrap" id="diwrap-${key}">
+      <img src="${d.img}" alt="${d.title}"
+        onerror="this.style.display='none';document.getElementById('diph-${key}').style.display='flex'">
+      <div id="diph-${key}" style="display:none;flex-direction:column;align-items:center;gap:8px">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" color="var(--blue)"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        <span class="dlg-ph-hint">${d.imgFile}</span>
+      </div>
+    </div>`;
+
+  // Аватар эксперта слева
+  const expertAva = `
+    <div class="dlg-ava-left">
+      <div class="dlg-ava-photo">
+        <img src="${d.expert.img}" alt="${d.expert.name}">
+      </div>
+      <div class="dlg-ava-label">${d.expert.name}</div>
+    </div>`;
+
+  // Аватар Вани справа
+  const vanyaAva = `
+    <div class="dlg-ava-right">
+      <div class="dlg-ava-photo v">
+        <img src="vanya.jpg" alt="Ваня"
+          onerror="this.style.display='none';this.parentElement.innerHTML='В'">
+      </div>
+      <div class="dlg-ava-label">Ваня</div>
+    </div>`;
+
+  const html = `${imgHtml}<div class="dlg-body">
+    <div class="dlg-characters-bar">
+      <div class="dlg-char-side">
+        <div class="dlg-ava-photo">
+          <img src="${d.expert.img}" alt="${d.expert.name}">
+        </div>
+        <div class="dlg-ava-label">${d.expert.name}</div>
+      </div>
+      <div class="dlg-char-title-wrap">
+        <div class="dlg-char-vs">переписка</div>
+      </div>
+      <div class="dlg-char-side">
+        <div class="dlg-ava-photo v">
+          <img src="vanya.jpg" alt="Ваня" onerror="this.style.display='none';this.parentElement.innerHTML='В'">
+        </div>
+        <div class="dlg-ava-label">Ваня</div>
+      </div>
+    </div>
+    <div class="dlg-title-row">
+      <div class="dlg-title">${d.title}</div>
+      <button class="dlg-skip-btn" id="dlg-skip-${key}" onclick="skipDialogue('${key}')">Пропустить</button>
+    </div>
+    <div class="dlg-sub">${d.sub}</div>
+    <div class="dialogue" id="dlg-msgs-${key}" onclick="skipDialogue('${key}')">
+      <div class="dlg-ava-left"></div>
+      <div class="dlg-messages" id="dlg-bubbles-${key}"></div>
+      <div class="dlg-ava-right"></div>
+      <div class="dlg-tap-hint" id="dlg-hint-${key}">Нажми на чат, чтобы пропустить</div>
+    </div>
+    <div class="dlg-outcomes-wrap">
+      <div class="dlg-outcome good" id="dlg-good-${key}" style="display:none"><div class="dlg-outcome-title">${d.good.title}</div>${d.good.text}</div>
+      <div class="dlg-outcome bad" id="dlg-bad-${key}" style="display:none"><div class="dlg-outcome-title">${d.bad.title}</div>${d.bad.text}</div>
+    </div>
+    <div class="dlg-close-wrap">
+      <button class="dlg-close" id="dlg-btn-${key}" onclick="closeModal()" style="display:none">Понятно</button>
+    </div>
+  </div>`;
+
+  openModal(html);
+
+  const bubblesContainer = document.getElementById(`dlg-bubbles-${key}`);
+  const msgs = d.msgs;
+  let i = 0;
+  let skipped = false;
+  let currentTimer = null;
+
+  function buildBubble(m, animate) {
+    const isV = m.w === 'v';
+    const row = document.createElement('div');
+    row.className = `msg-row ${isV ? 'vanya' : ''}`;
+    row.innerHTML = `<div class="msg-inner">
+      <div class="msg-name">${isV ? 'Ваня' : d.expert.name}</div>
+      <div class="msg-bubble ${animate ? 'msg-appear' : ''}">${m.t}</div>
+    </div>`;
+    return row;
+  }
+
+  function showEnding() {
+    const skipBtn = document.getElementById(`dlg-skip-${key}`);
+    if (skipBtn) skipBtn.style.display = 'none';
+    const hint = document.getElementById(`dlg-hint-${key}`);
+    if (hint) hint.style.display = 'none';
+    document.getElementById(`dlg-good-${key}`).style.display = 'block';
+    document.getElementById(`dlg-bad-${key}`).style.display = 'block';
+    document.getElementById(`dlg-btn-${key}`).style.display = 'block';
+    modal.scrollTo({top: modal.scrollHeight, behavior: 'smooth'});
+  }
+
+  window.skipDialogue = function(k) {
+    if (k !== key) return;
+    skipped = true;
+    clearTimeout(currentTimer);
+    bubblesContainer.querySelectorAll('.typing-ind').forEach(el => el.closest('.msg-row')?.remove());
+    while (i < msgs.length) {
+      bubblesContainer.appendChild(buildBubble(msgs[i], false));
+      i++;
+    }
+    showEnding();
+  };
+
+  function showNext() {
+    if (skipped) return;
+    if (i >= msgs.length) { showEnding(); return; }
+
+    const m = msgs[i];
+    const isV = m.w === 'v';
+
+    // Typing indicator
+    const typingRow = document.createElement('div');
+    typingRow.className = `msg-row ${isV ? 'vanya' : ''}`;
+    typingRow.innerHTML = `<div class="msg-inner">
+      <div class="msg-name">${isV ? 'Ваня' : d.expert.name}</div>
+      <div class="typing-ind"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>
+    </div>`;
+    bubblesContainer.appendChild(typingRow);
+    modal.scrollTo({top: modal.scrollHeight, behavior: 'smooth'});
+
+    const delay = Math.min(2200, Math.max(800, m.t.length * 28));
+    currentTimer = setTimeout(() => {
+      if (skipped) return;
+      typingRow.querySelector('.msg-inner').innerHTML =
+        `<div class="msg-name">${isV ? 'Ваня' : d.expert.name}</div>
+         <div class="msg-bubble msg-appear">${m.t}</div>`;
+      modal.scrollTo({top: modal.scrollHeight, behavior: 'smooth'});
+      i++;
+      currentTimer = setTimeout(showNext, 500);
+    }, delay);
+  }
+
+  currentTimer = setTimeout(showNext, 300);
 }
 
-// ── QUIZ ──
-const questions = [
-  { q: 'Что такое страховой полис?', opts: ['Документ, подтверждающий договор страхования', 'Список страховых компаний', 'Заявление на выплату', 'Медицинская карта'], ans: 0, exp: '✅ Полис — это договор между тобой и страховой компанией. В нём написано: что застраховано, на какую сумму и при каких случаях будет выплата.' },
-  { q: 'Что такое франшиза?', opts: ['Право работать под брендом', 'Часть ущерба, которую платит сам застрахованный', 'Бонус за безаварийную езду', 'Тип страхового полиса'], ans: 1, exp: '✅ Франшиза — твоя "доля" в ущербе. Например, если франшиза 5 000 ₽, а ущерб 20 000 ₽ — страховая платит 15 000 ₽.' },
-  { q: 'Какое страхование автомобиля обязательно по закону в России?', opts: ['КАСКО', 'ОСАГО', 'ДМС', 'НС'], ans: 1, exp: '✅ ОСАГО — Обязательное страхование автогражданской ответственности. Без него ездить нельзя по закону.' },
-  { q: 'Что покрывает ОМС?', opts: ['Только платные клиники', 'Медицинскую помощь в государственных больницах и поликлиниках', 'Только стоматологию', 'Только скорую помощь'], ans: 1, exp: '✅ ОМС покрывает бесплатную медицинскую помощь в государственных учреждениях.' },
-  { q: 'Зачем нужна туристическая страховка?', opts: ['Для скидки на билеты', 'На случай болезни или несчастного случая за рубежом', 'Только для визы', 'Для накопления миль'], ans: 1, exp: '✅ Туристическая страховка покрывает медицинскую помощь за рубежом. Лечение в Европе может стоить сотни тысяч рублей!' },
-  { q: 'Чем КАСКО отличается от ОСАГО?', opts: ['КАСКО обязательное, ОСАГО — нет', 'КАСКО защищает твой автомобиль, ОСАГО — других участников', 'Они одинаковые', 'КАСКО дешевле ОСАГО'], ans: 1, exp: '✅ ОСАГО = ответственность перед другими. КАСКО = защита твоей машины.' },
-  { q: 'Что значит "страховой случай"?', opts: ['Посещение страховой компании', 'Событие, при котором страховая обязана выплатить деньги', 'Покупка нового полиса', 'Отказ в выплате'], ans: 1, exp: '✅ Страховой случай — событие, предусмотренное договором, при котором страховая обязана сделать выплату.' },
-  { q: 'Может ли подросток до 18 лет застраховать свой телефон?', opts: ['Нет, только с 18 лет', 'Да, через родителей', 'Да, самостоятельно', 'Только через школу'], ans: 1, exp: '✅ До 18 лет договор страхования заключают родители или опекуны.' },
-  { q: 'Что нужно сделать ПЕРВЫМ при наступлении страхового случая?', opts: ['Ждать выплаты', 'Купить новый полис', 'Сообщить в страховую компанию', 'Написать в суд'], ans: 2, exp: '✅ Первое — сообщить в страховую! Обычно нужно сделать это в течение 3–5 дней.' },
-  { q: 'Что такое страховая премия?', opts: ['Подарок от страховой компании', 'Деньги, которые ты платишь за страховку', 'Размер выплаты при страховом случае', 'Штраф за просрочку'], ans: 1, exp: '✅ Страховая премия — это плата за страховку. Ты платишь страховой, она берёт на себя риски.' }
+// CHAR MODALS
+const charInfo={
+  jason:{name:'Джейсон',img:'jason.png',tag:'Спорт и НС',story:'Джейсон — бывший профессиональный спортсмен, сейчас тренер. Сам пережил серьёзную травму, которая закончила его карьеру раньше времени. Именно тогда он на собственном опыте узнал, как страховка от несчастных случаев спасает годы жизни и кучу денег. С тех пор он рассказывает об этом всем своим подопечным.',tip:'Полис НС для спортсмена — не опция, а необходимость. Стоит от 1 000 ₽ в год, покрывает переломы, операции, реабилитацию.'},
+  jordan:{name:'Джордан',img:'jordan.png',tag:'Гаджеты и поездки',story:'Джордан много путешествует и всегда берёт с собой дорогую технику. Однажды его ноутбук украли в аэропорту, а чемодан потерялся на стыковке. После этого он стал настоящим фанатом страховок — и теперь объясняет всем, почему нужно страховать и вещи, и поездки.',tip:'Туристическая страховка за неделю стоит 1 500–3 000 ₽. Лечение за рубежом без неё — от 100 000 ₽.'},
+  buffett:{name:'Баффет',img:'buffett.png',tag:'Имущество',story:'Баффет — человек, который умеет считать риски. Он объясняет: страхование — это не "потеря денег", а рациональный обмен маленькой потерей сейчас ради защиты от большой потери потом. Он застраховал всё своё имущество ещё будучи молодым, и ни разу об этом не пожалел.',tip:'Квартиру стоит страховать всегда. 1 500–3 000 ₽ в год защищают от пожара, потопа и кражи на сотни тысяч рублей.'},
+  sherlock:{name:'Шерлок',img:'sherlock.png',tag:'Договоры и полисы',story:'Шерлок не терпит мелкого шрифта и скрытых условий. Он дотошно читает каждый полис и всегда находит пункты, которые другие пропускают — особенно в разделе "Исключения". По его словам, 90% отказов в выплатах происходят потому, что люди не читают то, что подписывают.',tip:'Всегда читай раздел "Исключения" в полисе — именно там написано, за что страховая точно не заплатит.'}
+};
+function openCharModal(key){
+  const d=charInfo[key];
+  const html=`<div class="modal-pad">
+    <div style="display:flex;align-items:center;gap:16px;margin-bottom:18px">
+      <img src="${d.img}" style="width:72px;height:72px;border-radius:50%;object-fit:cover;object-position:top;border:2.5px solid var(--border)">
+      <div>
+        <div style="font-size:19px;font-weight:900">${d.name}</div>
+        <div style="display:inline-block;margin-top:5px;font-size:10px;font-weight:800;background:var(--blue-light);color:var(--blue);padding:2px 10px;border-radius:4px;text-transform:uppercase;letter-spacing:0.5px">${d.tag}</div>
+      </div>
+    </div>
+    <div class="modal-sub">${d.story}</div>
+    <div class="info-card green"><strong>Главный совет:</strong> ${d.tip}</div>
+    ${CB}</div>`;
+  openModal(html);
+}
+
+// LEARN
+const learnData={
+  what:{title:'Что такое страхование?',html:`<div class="modal-sub">Страхование — это когда много людей скидываются в общий фонд, а если у кого-то случилась беда — деньги из фонда помогают покрыть ущерб.</div><div class="info-card"><strong>Как это работает:</strong><br><br>1 000 человек платят по 100 ₽ в год → итого 100 000 ₽ в резерве страховой компании. Если у одного разбился телефон за 80 000 ₽ — страховая выплачивает ему из этого резерва. Остальные участники ничего не потеряли — их взносы остаются защитой на случай их собственной беды.</div><div class="modal-sec">Ключевые понятия</div><div class="steps-list"><div class="step-row"><div class="step-dot">1</div><div><strong>Страховой риск</strong> — возможное плохое событие: авария, болезнь, кража</div></div><div class="step-row"><div class="step-dot">2</div><div><strong>Страховая премия</strong> — деньги, которые ты платишь за страховку</div></div><div class="step-row"><div class="step-dot">3</div><div><strong>Страховой случай</strong> — когда плохое событие реально произошло</div></div><div class="step-row"><div class="step-dot">4</div><div><strong>Страховая выплата</strong> — деньги, которые тебе вернут</div></div></div>`},
+  types:{title:'Виды страхования',html:`<div class="modal-sub">Страхование бывает разным — зависит от того, что ты хочешь защитить.</div><div class="info-card"><strong>ОСАГО</strong> — обязательная автостраховка. Покрывает ущерб другим при ДТП. Без неё нельзя ездить.</div><div class="info-card orange"><strong>КАСКО</strong> — добровольная. Защищает твой автомобиль от угона, аварий, стихий.</div><div class="info-card green"><strong>ОМС / ДМС</strong> — медицинская. ОМС — бесплатно всем. ДМС — платно, но с доступом в частные клиники.</div><div class="info-card"><strong>Туристическая</strong> — защита в путешествиях. Лечение за рубежом, отмена рейса, потеря багажа.</div><div class="info-card orange"><strong>Имущество</strong> — страховка вещей. Телефон, ноутбук, квартира.</div><div class="info-card green"><strong>НС и жизнь</strong> — выплаты при травме. Особенно важно для спортсменов.</div>`},
+  teen:{title:'Страхование для подростка',html:`<div class="modal-sub">До 18 лет страховку оформляют родители, но защищает она именно тебя.</div><div class="modal-sec">Что актуально прямо сейчас</div><div class="steps-list"><div class="step-row"><div class="step-dot g">✓</div><div><strong>Гаджеты</strong> — застрахуй телефон или ноутбук от поломки и кражи. ~1–3% от стоимости в год.</div></div><div class="step-row"><div class="step-dot g">✓</div><div><strong>Спорт и НС</strong> — страховка от несчастного случая покрывает травмы на тренировках.</div></div><div class="step-row"><div class="step-dot g">✓</div><div><strong>Путешествия</strong> — обязательно при поездке за рубеж.</div></div><div class="step-row"><div class="step-dot g">✓</div><div><strong>ОМС</strong> — у тебя уже есть! Выдаётся в поликлинике по месту жительства.</div></div></div><div class="info-card green" style="margin-top:14px">С 14 лет можно получить свой полис ОМС самостоятельно — по паспорту.</div>`},
+  case:{title:'Страховой случай: что делать?',html:`<div class="modal-sub">Случилась неприятность? Не паникуй — действуй по шагам.</div><div class="steps-list"><div class="step-row"><div class="step-dot" style="background:#E03131">1</div><div><strong>Сообщи в страховую</strong> — позвони на горячую линию в течение 3–5 дней после события.</div></div><div class="step-row"><div class="step-dot" style="background:#F76707">2</div><div><strong>Зафиксируй ущерб</strong> — фото, видео, справки. Это главные доказательства.</div></div><div class="step-row"><div class="step-dot" style="background:#F59F00">3</div><div><strong>Собери документы</strong> — полис, паспорт, справки (врач, полиция, ЖКХ — по ситуации).</div></div><div class="step-row"><div class="step-dot g">4</div><div><strong>Подай заявление</strong> — в офисе или онлайн через личный кабинет.</div></div><div class="step-row"><div class="step-dot">5</div><div><strong>Получи выплату</strong> — по ОСАГО закон даёт страховой 20 рабочих дней. По добровольным видам (КАСКО, имущество, НС) — срок прописан в договоре.</div></div></div><div class="info-card red" style="margin-top:14px"><strong>Важно:</strong> большинство компаний требуют уведомить их в течение 3–5 дней. Опоздал — могут отказать.</div>`},
+  terms:{title:'Словарик терминов',html:`<div class="info-card"><strong>Полис</strong> — документ, подтверждающий договор страхования. Без него нет страховки.</div><div class="info-card orange"><strong>Страховая премия</strong> — деньги, которые ты платишь страховой. Раз в год или помесячно.</div><div class="info-card green"><strong>Франшиза</strong> — твоя доля в ущербе. Если франшиза 5 000 ₽, а ущерб 20 000 ₽ → страховая платит 15 000 ₽, ты — 5 000 ₽. С франшизой полис дешевле.</div><div class="info-card"><strong>Страховая сумма</strong> — максимум, который могут выплатить по полису.</div><div class="info-card red"><strong>Исключения</strong> — случаи, которые страховая НЕ покрывает. Читай внимательно до покупки!</div>`}
+};
+function openLearnModal(key){const d=learnData[key];openModal(`<div class="modal-pad"><div class="modal-title">${d.title}</div>${d.html}${CB}</div>`);}
+
+// CATS
+const catData={
+  osago:{title:'ОСАГО',html:`<div class="modal-sub">Обязательное страхование автогражданской ответственности. Без него ездить на машине в России незаконно.</div><div class="info-card"><strong>Что покрывает:</strong> ущерб другим людям и их машинам, если ты виноват в ДТП. До 400 000 ₽ — имущество, до 500 000 ₽ — здоровье.</div><div class="info-card orange"><strong>Что не покрывает:</strong> свой автомобиль. Для этого нужно КАСКО.</div><div class="info-card green"><strong>Стоимость:</strong> 5 000–15 000 ₽ в год, зависит от региона и водителя.</div>`},
+  kasko:{title:'КАСКО',html:`<div class="modal-sub">Добровольная страховка твоего автомобиля — защищает в любой ситуации.</div><div class="info-card"><strong>Что покрывает:</strong> угон, авария по твоей вине или чужой, стихийные бедствия (град, наводнение). Повреждения от третьих лиц на парковке — если это прописано в договоре.</div><div class="info-card orange"><strong>Стоимость:</strong> 3–10% от стоимости авто в год.</div><div class="info-card green"><strong>С франшизой:</strong> страховка дешевле, но мелкие расходы берёшь на себя.</div>`},
+  med:{title:'ОМС и ДМС',html:`<div class="modal-sub">Медицинское страхование — есть у каждого россиянина с рождения.</div><div class="info-card"><strong>ОМС:</strong> бесплатные поликлиники, больницы, скорая помощь.</div><div class="info-card orange"><strong>ДМС:</strong> частные клиники, без очередей, расширенные услуги. Стоимость — от 15 000 ₽ в год для детей, от 30 000–80 000 ₽ для взрослых (зависит от набора услуг и города).</div><div class="info-card green">У тебя уже есть полис ОМС — возьми его с собой при обращении к врачу.</div>`},
+  travel:{title:'Туристическая страховка',html:`<div class="modal-sub">Незаменима за рубежом — лечение без страховки может стоить сотни тысяч рублей.</div><div class="info-card"><strong>Что покрывает:</strong> медпомощь за рубежом, эвакуация, отмена/задержка рейса, потеря багажа.</div><div class="info-card orange"><strong>Стоимость:</strong> от 300 ₽ в день. Неделя в Европе — ~1 500–3 000 ₽.</div><div class="info-card green">Шенгенская виза требует страховку минимум на 30 000 €.</div><div class="info-card red">Покупай до поездки — некоторые полисы включают риск отмены поездки, но это отдельная опция. Уточняй при покупке.</div>`},
+  property:{title:'Страхование имущества',html:`<div class="modal-sub">Защити свои вещи — от телефона до квартиры.</div><div class="info-card"><strong>Гаджеты:</strong> телефон, ноутбук — от кражи, поломки, падения. ~1–3% от цены вещи в год.</div><div class="info-card orange"><strong>Квартира:</strong> от пожара, затопления соседями, кражи. Базовая защита — от 1 500 ₽ в год.</div><div class="info-card green">Родители могут застраховать твой телефон. При поломке или краже — получишь компенсацию за вычетом франшизы. Обычно страхуют через банк или страховую при покупке техники.</div>`},
+  life:{title:'Страхование жизни и НС',html:`<div class="modal-sub">Страховка от несчастных случаев — особенно важна для тех, кто занимается спортом.</div><div class="info-card"><strong>НС (несчастный случай):</strong> переломы, вывихи, ожоги, операции после травмы. Выплата — фиксированный % от страховой суммы по таблице. Стоимость — от 1 000–3 000 ₽ в год.</div><div class="info-card orange"><strong>Страхование жизни:</strong> выплата семье при гибели застрахованного.</div><div class="info-card green">Многие спортивные секции требуют полис НС — уточни у тренера.</div>`}
+};
+function openCatModal(key){const d=catData[key];openModal(`<div class="modal-pad"><div class="modal-title">${d.title}</div>${d.html}${CB}</div>`);}
+
+// TOPICS
+const topicData={
+  premium:{title:'Премия и франшиза',html:`<div class="info-card"><strong>Страховая премия</strong> — деньги, которые ты платишь страховой компании. Как абонентская плата за защиту.</div><div class="info-card orange"><strong>Франшиза</strong> — твоя «доля» в ущербе.<br><br>Пример: франшиза 5 000 ₽, ущерб 20 000 ₽ → страховая платит 15 000 ₽, ты — 5 000 ₽.</div><div class="info-card green"><strong>Зачем нужна?</strong> С франшизой полис стоит дешевле. Ты берёшь мелкие риски на себя, страховая берёт крупные.</div>`},
+  howpay:{title:'Как получить выплату?',html:`<div class="steps-list"><div class="step-row"><div class="step-dot">1</div><div>Позвони на горячую линию страховой в течение 3–5 дней</div></div><div class="step-row"><div class="step-dot">2</div><div>Зафиксируй ущерб: фото, видео, справки</div></div><div class="step-row"><div class="step-dot">3</div><div>Подай заявление — в офисе или онлайн</div></div><div class="step-row"><div class="step-dot">4</div><div>Приложи полис, паспорт и подтверждающие документы</div></div><div class="step-row"><div class="step-dot g">5</div><div>Получи выплату — по ОСАГО 20 рабочих дней, по добровольным видам — срок указан в договоре (обычно 15–30 дней)</div></div></div>`},
+  dtp:{title:'Что делать при ДТП?',html:`<div class="steps-list"><div class="step-row"><div class="step-dot" style="background:#E03131">1</div><div><strong>Стоп.</strong> Не трогай машину. Включи аварийку. Выставь знаки.</div></div><div class="step-row"><div class="step-dot" style="background:#F76707">2</div><div>Вызови скорую и ГИБДД если есть пострадавшие.</div></div><div class="step-row"><div class="step-dot" style="background:#F59F00">3</div><div>Сфотографируй место, повреждения, номера всех участников.</div></div><div class="step-row"><div class="step-dot">4</div><div>Обменяйся данными: ФИО, номер полиса ОСАГО другого участника.</div></div><div class="step-row"><div class="step-dot g">5</div><div>Сообщи в страховую в течение 5 рабочих дней (срок по закону для ОСАГО).</div></div></div><div class="info-card green" style="margin-top:12px">Европротокол: если нет пострадавших и оба согласны — можно оформить без ГИБДД при ущербе до 100 000 ₽. При фиксации через приложение «Госуслуги Авто» — лимит 400 000 ₽.</div>`},
+  under18:{title:'Страховка до 18 лет',html:`<div class="modal-sub">До 18 лет договор заключают родители — но страхует именно тебя.</div><div class="steps-list"><div class="step-row"><div class="step-dot g">✓</div><div><strong>Гаджеты</strong> — страховка имущества на телефон или ноутбук</div></div><div class="step-row"><div class="step-dot g">✓</div><div><strong>Спорт</strong> — полис НС при занятиях в секции</div></div><div class="step-row"><div class="step-dot g">✓</div><div><strong>Поездки</strong> — туристическая страховка за рубеж</div></div><div class="step-row"><div class="step-dot g">✓</div><div><strong>ОМС</strong> — уже есть, не нужно оформлять отдельно</div></div></div><div class="info-card orange" style="margin-top:12px">С 14 лет можно самостоятельно получить полис ОМС по паспорту.</div>`}
+};
+function openTopicModal(key){const d=topicData[key];openModal(`<div class="modal-pad"><div class="modal-title">${d.title}</div>${d.html}${CB}</div>`);}
+
+// QUIZ
+const questions=[
+  // Базовые понятия
+  {cat:'Основы',q:'Что такое страховой полис?',opts:['Документ, подтверждающий договор страхования','Список всех страховых компаний России','Заявление на получение выплаты','Медицинская карточка пациента'],ans:0,exp:'Полис — это договор между тобой и страховой компанией. В нём написано: что застраховано, на какую сумму и при каких обстоятельствах будет выплата.',img:'quiz_correct_1.jpg'},
+  {cat:'Основы',q:'Ваня платит 1 500 ₽ в год за страховку телефона. Как называется эта сумма?',opts:['Франшиза','Страховая выплата','Страховая премия','Страховой случай'],ans:2,exp:'Страховая премия — это деньги, которые ты платишь страховой компании за защиту. Как абонентская плата, только за спокойствие.',img:'quiz_correct_2.jpg'},
+  {cat:'Основы',q:'Что такое франшиза?',opts:['Право открыть бизнес под чужим брендом','Часть ущерба, которую платит сам застрахованный','Бонус за безаварийную езду','Особый тип страхового полиса'],ans:1,exp:'Франшиза — твоя доля в ущербе. Если франшиза 3 000 ₽, а ремонт стоит 15 000 ₽ — страховая платит 12 000 ₽, ты доплачиваешь 3 000 ₽. Зато полис с франшизой стоит дешевле.',img:'quiz_correct_3.jpg'},
+  {cat:'Основы',q:'Что такое страховой случай?',opts:['Визит в офис страховой компании','Событие, при котором страховая обязана заплатить','Покупка нового полиса','Ситуация, когда страховая отказывает в выплате'],ans:1,exp:'Страховой случай — это событие, которое предусмотрено договором. Когда оно происходит, страховая обязана сделать выплату.',img:'quiz_correct_4.jpg'},
+  // Авто
+  {cat:'Автострахование',q:'Какое страхование автомобиля обязательно по закону в России?',opts:['КАСКО','ОСАГО','ДМС','Страхование НС'],ans:1,exp:'ОСАГО — единственный обязательный вид автострахования в России. За езду без полиса — штраф 800 ₽. А при ДТП без ОСАГО виновник платит из своего кармана — это может быть сотни тысяч рублей.',img:'quiz_correct_5.jpg'},
+  {cat:'Автострахование',q:'Папа Вани виноват в ДТП и помял чужую машину. Чья страховка оплатит ремонт пострадавшему?',opts:['КАСКО папы Вани','ОСАГО папы Вани','ОСАГО пострадавшего','Ремонт оплачивается наличными'],ans:1,exp:'ОСАГО покрывает ущерб, нанесённый другим участникам ДТП по твоей вине. Страховая виновника платит пострадавшей стороне — именно для этого ОСАГО и является обязательным.',img:'quiz_correct_6.jpg'},
+  {cat:'Автострахование',q:'Чем КАСКО отличается от ОСАГО?',opts:['КАСКО — обязательное, ОСАГО — добровольное','КАСКО защищает твою машину, ОСАГО — других участников','Они защищают одно и то же, просто разные цены','КАСКО только для новых машин'],ans:1,exp:'ОСАГО — обязательное, покрывает ущерб другим людям по твоей вине. КАСКО — добровольное, защищает твою машину: угон, авария по твоей вине, град, пожар. Можно иметь оба полиса одновременно.',img:'quiz_correct_7.jpg'},
+  // Медицина и здоровье
+  {cat:'Медицина и НС',q:'У Вани есть полис ОМС. Что он даёт?',opts:['Скидку в частных клиниках','Бесплатную медицинскую помощь в государственных учреждениях','Страховку на случай травмы в спорте','Компенсацию за покупку лекарств'],ans:1,exp:'ОМС (обязательное медицинское страхование) есть у каждого россиянина с рождения. По нему бесплатно: вызов скорой, приём у врача, лечение в больнице, анализы. Полис нужно взять с собой при обращении в поликлинику.',img:'quiz_correct_8.jpg'},
+  {cat:'Медицина и НС',q:'На соревнованиях Ваня сломал запястье. У него есть полис НС (несчастный случай). На что он может рассчитывать?',opts:['Только на оплату «скорой помощи»','На выплату по таблице — процент от страховой суммы за перелом','На компенсацию пропущенных тренировок','На бесплатный ремонт спортивного зала'],ans:1,exp:'Полис НС выплачивает фиксированный процент от страховой суммы в зависимости от тяжести травмы. Например, при страховой сумме 300 000 ₽ перелом запястья даст выплату 24 000–36 000 ₽ (8–12%). Чем серьёзнее травма — тем выше процент.',img:'quiz_correct_9.jpg'},
+  // Путешествия и имущество
+  {cat:'Путешествия',q:'Джордан оформляет шенгенскую визу для поездки в Европу. Без какого документа визу не дадут?',opts:['Справки о доходах','Туристической страховки на сумму от 30 000 €','Медицинской карты на русском языке','Международного водительского удостоверения'],ans:1,exp:'Для получения шенгенской визы туристическая страховка обязательна — минимальное покрытие 30 000 €. Без неё визу не одобрят. И даже без визы — при болезни за рубежом без страховки лечение обойдётся от 100 000 ₽.',img:'quiz_correct_10.jpg'},
+  {cat:'Путешествия',q:'Чемодан Вани задержали — он прилетит только через 2 дня. Что покроет туристическая страховка с пакетом «багаж»?',opts:['Ничего — нужно ждать бесплатно','Покупку необходимых вещей: одежды, средств гигиены','Только моральный ущерб','Штрафные санкции против авиакомпании'],ans:1,exp:'При задержке багажа более чем на несколько часов туристическая страховка компенсирует покупку вещей первой необходимости — одежды и средств гигиены. Главное — сохранять все чеки и получить в аэропорту справку PIR.',img:'quiz_correct_11.jpg'},
+  {cat:'Имущество',q:'Телефон Вани стоит 60 000 ₽. Страховка на него — 1 500 ₽ в год с франшизой 3 000 ₽. Экран разбился, ремонт — 12 000 ₽. Сколько заплатит Ваня?',opts:['0 ₽ — страховка покроет всё','3 000 ₽ (только франшизу)','12 000 ₽ (страховка не действует при падении)','1 500 ₽ (стоимость страховки)'],ans:1,exp:'Ваня платит только франшизу — 3 000 ₽. Страховая покрывает остальное: 12 000 − 3 000 = 9 000 ₽. За год Ваня потратил 1 500 ₽ на страховку + 3 000 ₽ франшизы = 4 500 ₽ вместо 12 000 ₽ без страховки. Экономия — 7 500 ₽.',img:'quiz_correct_12.jpg'},
+  // Действия при страховом случае
+  {cat:'Что делать',q:'Что нужно сделать в первую очередь при наступлении страхового случая?',opts:['Подождать пока ситуация разрешится сама','Сразу купить новый полис','Позвонить в страховую компанию','Написать жалобу в Роспотребнадзор'],ans:2,exp:'Первое и главное — сообщить в страховую. Большинство компаний требуют уведомления в течение 3–5 дней. Пропустишь срок — могут отказать в выплате.',img:'quiz_correct_13.jpg'},
+  {cat:'Что делать',q:'Шерлок читает договор страхования и находит раздел «Исключения». Что в нём написано?',opts:['Список дополнительных услуг за доплату','Случаи, при которых страховая НЕ заплатит','Порядок расчёта страховой премии','Контакты службы поддержки'],ans:1,exp:'Исключения — самый важный раздел. Там написано, за что страховая точно не заплатит: алкогольное опьянение, умышленный вред, занятия экстремальным спортом без доп. пакета.',img:'quiz_correct_14.jpg'},
+  // До 18 лет
+  {cat:'Для подростков',q:'Ване 15 лет. Он хочет застраховать свой телефон. Кто должен заключить договор?',opts:['Ваня самостоятельно','Родители или опекуны Вани','Директор школы','Это невозможно до 18 лет'],ans:1,exp:'До 18 лет страховые договоры заключают родители или законные опекуны. Но страховка защищает именно тебя и твои вещи. С 14 лет можно самостоятельно получить только полис ОМС — по паспорту.',img:'quiz_correct_15.jpg'},
 ];
-let currentQ = 0, score = 0, answered = false;
-function initQuiz() {
-  currentQ = 0; score = 0; answered = false;
+
+let curQ=0,score=0,qAns=false,wrongIdx=[];
+
+function initQuiz(){
+  curQ=0;score=0;qAns=false;wrongIdx=[];
   document.getElementById('quizResult').classList.remove('show');
-  document.getElementById('quizArea').style.display = 'block';
+  document.getElementById('quizArea').style.display='block';
   renderQ();
 }
-function renderQ() {
-  const prog = document.getElementById('quizProgress');
-  prog.innerHTML = questions.map((_, i) => `<div class="q-dot ${i < currentQ ? 'done' : i === currentQ ? 'current' : ''}"></div>`).join('');
-  const q = questions[currentQ];
-  document.getElementById('qNum').textContent = `Вопрос ${currentQ + 1} из ${questions.length}`;
-  document.getElementById('qText').textContent = q.q;
-  document.getElementById('qOptions').innerHTML = q.opts.map((o, i) => `<button class="quiz-option" onclick="answerQ(${i})">${o}</button>`).join('');
-  document.getElementById('qFeedback').classList.remove('show', 'correct', 'wrong');
+
+function renderQ(){
+  document.getElementById('quizBar').innerHTML=questions.map((_,i)=>`<div class="qbar-seg ${i<curQ?'done':i===curQ?'cur':''}"></div>`).join('');
+  const q=questions[curQ];
+  document.getElementById('qNum').textContent=`Вопрос ${curQ+1} из ${questions.length}`;
+  document.getElementById('qCat').textContent=q.cat;
+  document.getElementById('qText').textContent=q.q;
+  document.getElementById('qOpts').innerHTML=q.opts.map((o,i)=>`<button class="quiz-opt" onclick="answerQ(${i})">${o}</button>`).join('');
+  // Reset feedback
+  const fb=document.getElementById('qFeedback');
+  fb.className='quiz-fb';
+  document.getElementById('qImgWrap').style.display='none';
+  document.getElementById('qFbText').textContent='';
   document.getElementById('qNext').classList.remove('show');
-  answered = false;
+  qAns=false;
 }
-function answerQ(idx) {
-  if (answered) return;
-  answered = true;
-  const q = questions[currentQ];
-  const opts = document.querySelectorAll('.quiz-option');
-  opts[q.ans].classList.add('correct');
-  if (idx !== q.ans) opts[idx].classList.add('wrong');
+
+function answerQ(idx){
+  if(qAns)return;qAns=true;
+  const q=questions[curQ];
+  const isCorrect=idx===q.ans;
+  document.querySelectorAll('.quiz-opt')[q.ans].classList.add('correct');
+  if(!isCorrect){document.querySelectorAll('.quiz-opt')[idx].classList.add('wrong');wrongIdx.push(curQ);}
   else score++;
-  const fb = document.getElementById('qFeedback');
-  fb.textContent = idx === q.ans ? q.exp : `❌ Неверно. ${q.exp}`;
-  fb.className = `quiz-feedback show ${idx === q.ans ? 'correct' : 'wrong'}`;
-  document.getElementById('qNext').classList.add('show');
-  document.getElementById('qNext').textContent = currentQ < questions.length - 1 ? 'Следующий вопрос →' : 'Посмотреть результат 🎉';
-}
-function nextQuestion() {
-  currentQ++;
-  if (currentQ >= questions.length) showResult();
-  else renderQ();
-}
-function showResult() {
-  document.getElementById('quizArea').style.display = 'none';
-  const res = document.getElementById('quizResult');
-  res.classList.add('show');
-  const pct = score / questions.length;
-  document.getElementById('resultScore').textContent = `${score}/${questions.length}`;
-  document.getElementById('resultEmoji').textContent = pct >= 0.8 ? '🏆' : pct >= 0.5 ? '👍' : '📚';
-  document.getElementById('resultLabel').textContent = pct >= 0.8 ? 'Отлично! Ты знаток страхования!' : pct >= 0.5 ? 'Хороший результат! Но ещё есть что узнать' : 'Советуем пройти обучение ещё раз';
-}
-function restartQuiz() { initQuiz(); }
 
-// ── CHAT ──
-const chatHistory = [];
+  // Show feedback
+  const fb=document.getElementById('qFeedback');
+  fb.className=`quiz-fb show ${isCorrect?'correct':'wrong'}`;
+  document.getElementById('qFbText').textContent=(isCorrect?'Верно! ':'Неверно. ')+q.exp;
 
-function appendMsg(text, role) {
-  const msgs = document.getElementById('chatMessages');
-  const div = document.createElement('div');
-  div.className = `msg ${role}`;
-  div.innerHTML = role === 'bot'
-    ? `<div class="msg-avatar">🛡️</div><div class="msg-bubble">${text}</div>`
-    : `<div class="msg-bubble">${text}</div>`;
-  msgs.appendChild(div);
-  msgs.scrollTop = msgs.scrollHeight;
-}
-
-function showTyping() {
-  const msgs = document.getElementById('chatMessages');
-  const div = document.createElement('div');
-  div.className = 'msg bot'; div.id = 'typing';
-  div.innerHTML = `<div class="msg-avatar">🛡️</div><div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>`;
-  msgs.appendChild(div);
-  msgs.scrollTop = msgs.scrollHeight;
-}
-
-async function sendChat() {
-  const input = document.getElementById('chatInput');
-  const sendBtn = document.getElementById('chatSendBtn');
-  const text = input.value.trim();
-  if (!text || sendBtn.disabled) return;
-
-  input.value = '';
-  appendMsg(text, 'user');
-  chatHistory.push({ role: 'user', content: text });
-
-  sendBtn.disabled = true;
-  showTyping();
-
-  try {
-    const res = await fetch('/api/chat', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ messages: chatHistory }),
-    });
-
-    document.getElementById('typing')?.remove();
-
-    if (!res.ok) throw new Error('Ошибка сервера');
-
-    const data = await res.json();
-    const reply = data.reply || 'Не удалось получить ответ.';
-    appendMsg(reply, 'bot');
-    chatHistory.push({ role: 'assistant', content: reply });
-  } catch (err) {
-    document.getElementById('typing')?.remove();
-    appendMsg('⚠️ Ошибка соединения. Попробуй ещё раз.', 'bot');
-  } finally {
-    sendBtn.disabled = false;
-    input.focus();
+  // Show image on correct answer
+  if(isCorrect && q.img){
+    const wrap=document.getElementById('qImgWrap');
+    const img=document.getElementById('qImg');
+    const ph=document.getElementById('qImgPh');
+    const phName=document.getElementById('qImgName');
+    wrap.style.display='block';
+    ph.style.display='none';
+    img.style.display='block';
+    img.src=q.img;
+    img.onerror=()=>{img.style.display='none';ph.style.display='flex';phName.textContent=q.img;};
   }
+
+  const nx=document.getElementById('qNext');
+  nx.textContent=curQ<questions.length-1?'Следующий вопрос':'Посмотреть результат';
+  nx.classList.add('show');
 }
 
-function sendSuggest(el) {
-  document.getElementById('chatInput').value = el.textContent;
-  sendChat();
+function nextQ(){curQ++;if(curQ>=questions.length)showResult();else renderQ();}
+
+function showResult(){
+  document.getElementById('quizArea').style.display='none';
+  const r=document.getElementById('quizResult');r.classList.add('show');
+  const pct=score/questions.length;
+  document.getElementById('resStars').textContent=pct>=0.87?'★ ★ ★':pct>=0.6?'★ ★':'★';
+  document.getElementById('resScore').textContent=`${score}/${questions.length}`;
+  document.getElementById('resLabel').textContent=
+    pct>=0.87?'Отлично! Ты настоящий эксперт по страхованию.':
+    pct>=0.6?'Хороший результат! Немного подучиться — и будешь профи.':
+    'Советуем перечитать истории Вани — там всё объясняется на примерах.';
+
+  // Breakdown by category
+  const cats={};
+  questions.forEach((q,i)=>{
+    if(!cats[q.cat])cats[q.cat]={total:0,right:0};
+    cats[q.cat].total++;
+    if(!wrongIdx.includes(i))cats[q.cat].right++;
+  });
+  const bd=document.getElementById('resBreakdown');
+  bd.innerHTML=Object.entries(cats).map(([cat,v])=>`
+    <div class="res-cat-row">
+      <span class="res-cat-name">${cat}</span>
+      <div class="res-cat-bar-wrap"><div class="res-cat-bar" style="width:${Math.round(v.right/v.total*100)}%"></div></div>
+      <span class="res-cat-score">${v.right}/${v.total}</span>
+    </div>`).join('');
 }
+
+// CHAT
+const chatHistory=[];
+function appendMsg(text,role){
+  const msgs=document.getElementById('chatMsgs');
+  const row=document.createElement('div');
+  row.className=`chat-row ${role==='user'?'user':''}`;
+  if(role==='user'){
+    row.innerHTML=`<div class="chat-bubble">${text}</div>`;
+    msgs.appendChild(row);
+  }else{
+    const ava=document.createElement('div');ava.className='chat-ava';ava.textContent='В';
+    const bbl=document.createElement('div');bbl.className='chat-bubble';
+    row.appendChild(ava);row.appendChild(bbl);msgs.appendChild(row);
+    let i=0;
+    (function type(){if(i<text.length){bbl.textContent+=text[i];i++;msgs.scrollTop=msgs.scrollHeight;setTimeout(type,26);}})();
+    return;
+  }
+  msgs.scrollTop=msgs.scrollHeight;
+}
+function showTyping(){
+  const msgs=document.getElementById('chatMsgs');
+  const row=document.createElement('div');row.className='chat-row';row.id='typingRow';
+  row.innerHTML=`<div class="chat-ava">В</div><div class="typing-ind"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>`;
+  msgs.appendChild(row);msgs.scrollTop=msgs.scrollHeight;
+}
+async function sendChat(){
+  const inp=document.getElementById('chatInput'),btn=document.getElementById('chatSendBtn');
+  const text=inp.value.trim();if(!text||btn.disabled)return;
+  inp.value='';appendMsg(text,'user');chatHistory.push({role:'user',content:text});
+  btn.disabled=true;showTyping();
+  try{
+    const res=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:chatHistory})});
+    document.getElementById('typingRow')?.remove();
+    if(!res.ok)throw new Error();
+    const data=await res.json();
+    const reply=data.reply||'Не удалось получить ответ.';
+    appendMsg(reply,'bot');chatHistory.push({role:'assistant',content:reply});
+  }catch{
+    document.getElementById('typingRow')?.remove();
+    appendMsg('Ошибка соединения. Попробуй ещё раз.','bot');
+  }finally{btn.disabled=false;inp.focus();}
+}
+function sendSug(el){document.getElementById('chatInput').value=el.textContent;sendChat();}
 
 initQuiz();
 </script>
